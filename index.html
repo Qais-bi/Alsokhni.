@@ -3,188 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>السخني برو | Alsokhni Pro - المكتبة الشاملة</title>
+    <title>ALSokhni Pro | بوابتك للملحقات الرقمية</title>
+    
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
     <style>
-        :root { --primary: #e30613; --dark: #121212; --success: #28a745; --ultimate-gold: #ffc107; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; color: #333; line-height: 1.6; }
-        header { background: var(--dark); color: white; padding: 30px 10px; text-align: center; border-bottom: 5px solid var(--primary); }
-        .hero { background: white; padding: 40px 20px; text-align: center; border-bottom: 1px solid #eee; margin-bottom: 20px; }
-        .section-title { text-align: center; margin: 30px 0 10px; font-size: 24px; color: var(--dark); }
-        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 20px; max-width: 1200px; margin: auto; }
-        .card { background: white; border-radius: 18px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); transition: 0.3s; position: relative; border: 1px solid #eee; text-align: center; }
-        .card:hover { transform: translateY(-7px); }
-        .badge { position: absolute; top: 15px; left: 15px; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .free-badge { background: #e8f5e9; color: #2e7d32; }
-        .paid-badge { background: #fff8e1; color: #f57f17; }
-        .btn { display: block; width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 16px; transition: 0.2s; }
-        .btn-free { background: var(--success); color: white; }
-        .btn-lock { background: var(--primary); color: white; }
-        
-        /* النوافذ المنبثقة */
-        #payment-modal, #admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-box { background: white; padding: 30px; border-radius: 25px; width: 90%; max-width: 450px; text-align: center; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        .plan-item { border: 2px solid #f0f0f0; padding: 15px; border-radius: 15px; margin-bottom: 12px; text-align: right; font-weight: bold; }
-        .merchant-code { font-size: 28px; font-weight: bold; color: var(--primary); background: #fdf2f2; padding: 10px; border-radius: 10px; display: block; margin: 15px 0; border: 1px dashed var(--primary); }
-        input, select { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; text-align: center; }
-        footer { text-align: center; padding: 40px; color: #999; }
+        :root { --primary: #e30613; --dark: #121212; --success: #28a745; --light-bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-bg); margin: 0; text-align: center; color: #333; }
+        header { background: var(--dark); color: white; padding: 30px 20px; border-bottom: 5px solid var(--primary); }
+        .container { padding: 20px; max-width: 480px; margin: auto; }
+        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 25px; border: 1px solid #eee; }
+        input, select { width: 100%; padding: 14px; margin: 12px 0; border: 2px solid #eee; border-radius: 12px; box-sizing: border-box; text-align: center; font-size: 16px; outline: none; }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 18px; transition: 0.3s; display: block; }
+        .btn-activate { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3); }
+        .notice-box { font-size: 14px; color: #444; background: #fff5f5; padding: 20px; border-radius: 15px; border-right: 6px solid var(--primary); margin-top: 20px; line-height: 1.7; text-align: right; }
+        .highlight { color: var(--primary); font-weight: bold; }
+        .contact-area { margin-top: 40px; padding: 20px; border-top: 1px solid #ddd; }
+        .fb-button { color: #1877f2; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; margin-top: 10px; }
+        .admin-hidden-trigger { background: none; border: none; color: var(--light-bg); font-size: 5px; cursor: pointer; position: fixed; bottom: 5px; right: 5px; user-select: none; z-index: 9999; }
+        #admin-panel { display: none; background: white; padding: 25px; border-radius: 20px; border: 3px solid var(--dark); margin-top: 20px; position: relative; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>ALSOKHNI PRO</h1>
-    <p>بوابتك الرقمية للإبداع اللامحدود في سوريا 🇸🇾</p>
+    <h1>ALSOKHNI PRO 🚀</h1>
+    <p>المتجر الرقمي الأول للمصممين في سوريا</p>
 </header>
 
-<div class="hero">
-    <h2>انطلق بمشاريعك للمستوى الاحترافي</h2>
-    <p>ادفع مرة واحدة.. واحصل على كل الميزات مدى الحياة 🚀</p>
-</div>
-
-<h2 class="section-title">🎁 هدايا مجانية (للمبدعين)</h2>
 <div class="container">
     <div class="card">
-        <span class="badge free-badge">مجاني</span>
-        <h3>حزمة خطوط السخني (Mini)</h3>
-        <p>50 خطاً عربياً مختاراً لتبدأ أعمالك الاحترافية فوراً.</p>
-        <button class="btn btn-free" onclick="alert('بدء التحميل المجاني...')">⬇️ تحميل مجاني</button>
-    </div>
-    <div class="card">
-        <span class="badge free-badge">مجاني</span>
-        <h3>قالب Reels (CapCut)</h3>
-        <p>قالب فيديو تريند جاهز لزيادة التفاعل على حسابك.</p>
-        <button class="btn btn-free" onclick="alert('بدء تحميل القالب...')">⬇️ تحميل مجاني</button>
-    </div>
-</div>
-
-<h2 class="section-title">💎 باقات ALSOKHNI PRO</h2>
-<div class="container">
-    <div class="card">
-        <span class="badge paid-badge">باقة المبتدئ</span>
-        <h3>حزمة الـ 1000 خط احترافي</h3>
-        <p>وصول كامل لأضخم مكتبة خطوط عربية وأجنبية.</p>
-        <button class="btn btn-lock" onclick="checkAccess(1)">🔓 فتح بـ 200 عملة</button>
-    </div>
-    <div class="card">
-        <span class="badge paid-badge">باقة المحترف</span>
-        <h3>مكتبة المونتاج الكاملة</h3>
-        <p>قوالب فيديو حصرية + مؤثرات صوتية احترافية.</p>
-        <button class="btn btn-lock" onclick="checkAccess(2)">🔓 فتح بـ 400 عملة</button>
-    </div>
-    <div class="card">
-        <span class="badge paid-badge" style="background:var(--ultimate-gold); color:#000;">باقة ULTIMATE</span>
-        <h3>المكتبة الشاملة (Full Access)</h3>
-        <p>ملفات PSD + كورسات + كل التحديثات للأبد.</p>
-        <button class="btn btn-lock" onclick="checkAccess(3)">🔓 فتح بـ 650 عملة</button>
-    </div>
-</div>
-
-<div id="payment-modal">
-    <div class="modal-box">
-        <h3 style="color:var(--primary);">تفعيل العضوية الدائمة 💎</h3>
-        <p style="font-size: 14px;">حول المبلغ حسب الباقة لرمز المستخدم عبر سيريتل كاش:</p>
-        <span class="merchant-code">17273530</span>
-        <div class="plan-item">🥉 مبتدئ: 200 عملة (20,000 ل.س)</div>
-        <div class="plan-item">🥈 محترف: 400 عملة (40,000 ل.س)</div>
-        <div class="plan-item" style="border-color: var(--ultimate-gold);">🥇 Ultimate: 650 عملة (65,000 ل.س)</div>
-        <p style="font-size: 13px; color: #666;">أدخل رقم العملية المستلم لتفعيل حسابك فوراً:</p>
-        <input type="text" id="trans-input" placeholder="رقم العملية">
-        <button class="btn btn-lock" id="verify-btn" onclick="verifyPayment()">تأكيد وتفعيل الحساب الآن</button>
-        <button onclick="closeModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:10px;">إلغاء</button>
-    </div>
-</div>
-
-<div id="admin-modal">
-    <div class="modal-box">
-        <h3>لوحة إدارة السخني برو 🔐</h3>
-        <input type="password" id="admin-pass" placeholder="كلمة السر">
-        <button class="btn btn-lock" onclick="checkAdmin()">دخول</button>
-        <div id="admin-controls" style="display:none; margin-top:20px; border-top:1px solid #eee; padding-top:15px;">
-            <input type="text" id="new-id" placeholder="رقم العملية المستلم">
-            <select id="plan-level">
-                <option value="1">باقة مبتدئ (200)</option>
-                <option value="2">باقة محترف (400)</option>
-                <option value="3">باقة Ultimate (650)</option>
-            </select>
-            <button class="btn btn-free" onclick="addTransaction()">تفعيل الرقم في النظام</button>
+        <h3 style="margin-top:0;">🔓 تفعيل الحساب</h3>
+        <p style="color: #666;">أدخل رقم العملية لتتمكن من الوصول للملفات:</p>
+        <input type="text" id="user-code" placeholder="أدخل الرقم هنا (12 رقم)">
+        <button class="btn btn-activate" id="verify-btn" onclick="verifyForUser()">تفعيل وفتح الروابط ⚡</button>
+        
+        <div class="notice-box">
+            <p>• <span class="highlight">رقم تفعيل الحساب</span> هو نفسه رقم عملية التحويل من سيريتل كاش المؤلف من 12 رقم يرجى ادخاله بعد انقضاء المدة المحددة.</p>
+            <p>• الدفعة تقبل بعد <span class="highlight">3 ساعات الى 12 ساعة</span>، لا تتواصل مع الادمن قبل انقضاء المدة المحددة.</p>
+            <p style="font-size: 16px; text-align: center; margin-bottom: 0;">نشكر تفهمكم❤</p>
         </div>
-        <button onclick="closeAdmin()" style="background:none; border:none; color:gray; margin-top:10px;">إغلاق</button>
+    </div>
+
+    <div class="contact-area">
+        <p style="margin-bottom: 5px;">للتواصل مع الادمن محمد قيس السخني:</p>
+        <a href="https://www.facebook.com/share/1D24b8PBQ7/" target="_blank" class="fb-button">🔗 اضغط هنا لزيارة صفحتنا على فيسبوك</a>
+    </div>
+
+    <button class="admin-hidden-trigger" onclick="showAdmin()">Admin</button>
+    
+    <div id="admin-panel">
+        <span style="position:absolute; top:10px; left:10px; color:red; cursor:pointer;" onclick="closeAdmin()">X</span>
+        <h4>🔐 لوحة تحكم قيس</h4>
+        <input type="password" id="admin-pass" placeholder="كلمة السر">
+        <button id="login-btn" class="btn" style="background:#444; color:white;" onclick="checkAdminPass()">دخول</button>
+
+        <div id="admin-tools" style="display:none; margin-top: 15px;">
+            <hr>
+            <input type="text" id="new-code" placeholder="رقم العملية الجديد">
+            <select id="target-level">
+                <option value="1">باقة المبتدئ (خطوط احترافية)</option>
+                <option value="2">باقة المحترف (ملحقات مونتاج)</option>
+                <option value="3">باقة ULTIMATE (المكتبة الشاملة)</option>
+            </select>
+            <button class="btn" style="background:var(--success); color:white;" onclick="addCodeToFirebase()">حفظ الرقم الآن ✅</button>
+        </div>
     </div>
 </div>
-
-<footer>
-    <p>© 2026 ALSOKHNI PRO | بوابتك نحو الاحتراف</p>
-    <button onclick="openAdmin()" style="background:none; border:none; color:#ddd; font-size:10px; cursor:pointer;">Admin Login</button>
-</footer>
 
 <script>
-    // إعدادات Firebase الخاصة بك
     const firebaseConfig = {
         apiKey: "AIzaSyD5SBNB_XuMz97sVDvoWPYBqKfe7KjaQlA",
         authDomain: "alsokhnipro-2b720.firebaseapp.com",
         projectId: "alsokhnipro-2b720",
-        storageBucket: "alsokhnipro-2b720.firebasestorage.app",
-        messagingSenderId: "72490856072",
         appId: "1:72490856072:web:048a610cb8f7f9b73e793d"
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // فحص الصلاحية
-    function checkAccess(requiredLevel) {
-        const userLevel = parseInt(localStorage.getItem("alsokhni_level") || "0");
-        if (userLevel >= requiredLevel) {
-            alert("✅ وصول مسموح! سيتم توجيهك لرابط التحميل الآن.");
-        } else {
-            document.getElementById('payment-modal').style.display = 'flex';
-        }
-    }
+    // الروابط الحقيقية التي طلبتها
+    const driveLinks = {
+        1: "https://www.mediafire.com/folder/p1v7dxtz78vxt/Fonts_Pack", 
+        2: "https://www.mediafire.com/folder/m69136113p683/Editing_Pack",
+        3: "https://mega.nz/folder/Yp9mSTrA#7X7mFh1n9_m-8-kY_mX9Qw"
+    };
 
-    // تفعيل الحساب
-    async function verifyPayment() {
-        const transId = document.getElementById('trans-input').value;
+    async function verifyForUser() {
+        const code = document.getElementById('user-code').value.trim();
         const btn = document.getElementById('verify-btn');
-        if(!transId) return alert("يرجى إدخال رقم العملية أولاً");
+        if(!code) return alert("يرجى إدخال رقم العملية أولاً!");
 
-        btn.innerText = "جاري التحقق من المخزن...";
-        const snapshot = await db.collection("payments").where("id", "==", transId).get();
-
-        if (!snapshot.empty) {
-            const data = snapshot.docs[0].data();
-            localStorage.setItem("alsokhni_level", data.level);
-            alert("تهانينا يا قيس! تم تفعيل الباقة بنجاح مدى الحياة.");
-            location.reload();
-        } else {
-            alert("❌ الرقم غير موجود بالمخزن المؤكد. تأكد من صحته أو انتظر تفعيل المدير.");
-            btn.innerText = "تأكيد وتفعيل الحساب الآن";
-        }
+        btn.innerText = "جاري التحقق... ⏳";
+        try {
+            const snapshot = await db.collection("payments").where("id", "==", code).get();
+            if (!snapshot.empty) {
+                const level = snapshot.docs[0].data().level;
+                alert("✅ تم التفعيل بنجاح! سيتم فتح المجلد الآن.");
+                window.location.href = driveLinks[level];
+            } else {
+                alert("❌ الرقم غير موجود بعد. تأكد من المدة (3-12 ساعة).");
+                btn.innerText = "تفعيل وفتح الروابط ⚡";
+            }
+        } catch (e) { alert("خطأ في الشبكة"); btn.innerText = "تفعيل وفتح الروابط ⚡"; }
     }
 
-    // إدارة قيس
-    function checkAdmin() {
-        if(document.getElementById('admin-pass').value === "123456") {
-            document.getElementById('admin-controls').style.display = 'block';
-        } else { alert("كلمة السر خاطئة!"); }
+    function showAdmin() { document.getElementById('admin-panel').style.display = 'block'; }
+    function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
+
+    function checkAdminPass() {
+        if(document.getElementById('admin-pass').value === "1996") {
+            document.getElementById('admin-tools').style.display = 'block';
+            document.getElementById('login-btn').style.display = 'none';
+        } else { alert("خطأ!"); }
     }
 
-    async function addTransaction() {
-        const id = document.getElementById('new-id').value;
-        const level = document.getElementById('plan-level').value;
-        if(!id) return;
-        await db.collection("payments").add({
-            id: id,
-            level: parseInt(level),
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        alert("✅ تمت إضافة العملية بنجاح! يمكن للزبون التفعيل الآن.");
-        document.getElementById('new-id').value = "";
+    async function addCodeToFirebase() {
+        const code = document.getElementById('new-code').value.trim();
+        const level = document.getElementById('target-level').value;
+        if(!code) return alert("أدخل الرقم!");
+        await db.collection("payments").add({ id: code, level: parseInt(level), date: new Date() });
+        alert("✅ تم الحفظ!");
+        document.getElementById('new-code').value = "";
     }
-
-    function closeModal() { document.getElementById('payment-modal').style.display = 'none'; }
-    function openAdmin() { document.getElementById('admin-modal').style.display = 'flex'; }
-    function closeAdmin() { document.getElementById('admin-modal').style.display = 'none'; }
 </script>
 </body>
 </html>
