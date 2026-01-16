@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALSokhni Pro | بوابتك للملحقات الرقمية</title>
-    
+    <title>ALSokhni Pro | الملحقات الرقمية</title>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-
     <style>
         :root { --primary: #e30613; --dark: #121212; --success: #28a745; --light-bg: #f4f7f6; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-bg); margin: 0; text-align: center; color: #333; }
         header { background: var(--dark); color: white; padding: 30px 20px; border-bottom: 5px solid var(--primary); }
         .container { padding: 20px; max-width: 480px; margin: auto; }
-        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 25px; border: 1px solid #eee; }
+        .card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 25px; border: 1px solid #eee; position: relative; }
+        .badge-free { position: absolute; top: 10px; left: 10px; background: var(--success); color: white; padding: 4px 10px; border-radius: 10px; font-size: 12px; font-weight: bold; }
         input, select { width: 100%; padding: 14px; margin: 12px 0; border: 2px solid #eee; border-radius: 12px; box-sizing: border-box; text-align: center; font-size: 16px; outline: none; }
-        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 18px; transition: 0.3s; display: block; }
-        .btn-activate { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3); }
-        .notice-box { font-size: 14px; color: #444; background: #fff5f5; padding: 20px; border-radius: 15px; border-right: 6px solid var(--primary); margin-top: 20px; line-height: 1.7; text-align: right; }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 17px; transition: 0.3s; display: block; text-decoration: none; margin-top: 10px; }
+        .btn-activate { background: var(--primary); color: white; }
+        .btn-free { background: var(--success); color: white; }
+        .notice-box { font-size: 14px; color: #444; background: #fff5f5; padding: 15px; border-radius: 10px; border-right: 6px solid var(--primary); margin-top: 15px; line-height: 1.6; text-align: right; }
         .highlight { color: var(--primary); font-weight: bold; }
         .contact-area { margin-top: 40px; padding: 20px; border-top: 1px solid #ddd; }
         .fb-button { color: #1877f2; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; margin-top: 10px; }
+        /* زر الآدمن المخفي تماماً */
         .admin-hidden-trigger { background: none; border: none; color: var(--light-bg); font-size: 5px; cursor: pointer; position: fixed; bottom: 5px; right: 5px; user-select: none; z-index: 9999; }
         #admin-panel { display: none; background: white; padding: 25px; border-radius: 20px; border: 3px solid var(--dark); margin-top: 20px; position: relative; }
     </style>
@@ -33,46 +34,58 @@
 </header>
 
 <div class="container">
+    
+    <h2 style="font-size: 18px; color: var(--success);">🎁 هدايا مجانية للجميع</h2>
     <div class="card">
-        <h3 style="margin-top:0;">🔓 تفعيل الحساب</h3>
-        <p style="color: #666;">أدخل رقم العملية لتتمكن من الوصول للملفات:</p>
-        <input type="text" id="user-code" placeholder="أدخل الرقم هنا (12 رقم)">
-        <button class="btn btn-activate" id="verify-btn" onclick="verifyForUser()">تفعيل وفتح الروابط ⚡</button>
+        <span class="badge-free">مجاني</span>
+        <h3>حزمة الخطوط الأساسية</h3>
+        <p style="font-size: 13px; color: #666;">مكتبة تضم مئات الخطوط العربية والإنجليزية.</p>
+        <a href="https://www.dafont.com/" target="_blank" class="btn btn-free">⬇️ تحميل مجاني مباشر</a>
+    </div>
+
+    <hr style="border: 0.5px solid #ddd; margin: 30px 0;">
+
+    <h2 style="font-size: 18px; color: var(--primary);">💎 تفعيل الباقات Pro</h2>
+    <div class="card">
+        <h3>🔓 أدخل رقم العملية</h3>
+        <input type="text" id="user-code" placeholder="رقم الـ 12 خانة">
+        <button class="btn btn-activate" id="verify-btn" onclick="verifyForUser()">تفعيل وفتح المجلد ⚡</button>
         
         <div class="notice-box">
             <p>• <span class="highlight">رقم تفعيل الحساب</span> هو نفسه رقم عملية التحويل من سيريتل كاش المؤلف من 12 رقم يرجى ادخاله بعد انقضاء المدة المحددة.</p>
             <p>• الدفعة تقبل بعد <span class="highlight">3 ساعات الى 12 ساعة</span>، لا تتواصل مع الادمن قبل انقضاء المدة المحددة.</p>
-            <p style="font-size: 16px; text-align: center; margin-bottom: 0;">نشكر تفهمكم❤</p>
+            <p style="text-align: center; margin-bottom: 0;">نشكر تفهمكم❤</p>
         </div>
     </div>
 
     <div class="contact-area">
-        <p style="margin-bottom: 5px;">للتواصل مع الادمن محمد قيس السخني:</p>
-        <a href="https://www.facebook.com/share/1D24b8PBQ7/" target="_blank" class="fb-button">🔗 اضغط هنا لزيارة صفحتنا على فيسبوك</a>
+        <p>للتواصل مع الادمن محمد قيس السخني:</p>
+        <a href="https://www.facebook.com/share/1D24b8PBQ7/" target="_blank" class="fb-button">🔗 رابط صفحة الفيسبوك</a>
     </div>
 
     <button class="admin-hidden-trigger" onclick="showAdmin()">Admin</button>
     
     <div id="admin-panel">
-        <span style="position:absolute; top:10px; left:10px; color:red; cursor:pointer;" onclick="closeAdmin()">X</span>
-        <h4>🔐 لوحة تحكم قيس</h4>
+        <span style="position:absolute; top:10px; left:10px; color:red; cursor:pointer; font-weight:bold;" onclick="closeAdmin()">X</span>
+        <h4>🔐 إضافة رقم عملية جديد</h4>
         <input type="password" id="admin-pass" placeholder="كلمة السر">
         <button id="login-btn" class="btn" style="background:#444; color:white;" onclick="checkAdminPass()">دخول</button>
 
         <div id="admin-tools" style="display:none; margin-top: 15px;">
             <hr>
-            <input type="text" id="new-code" placeholder="رقم العملية الجديد">
+            <input type="text" id="new-code" placeholder="رقم العملية (12 خانة)">
             <select id="target-level">
-                <option value="1">باقة المبتدئ (خطوط احترافية)</option>
-                <option value="2">باقة المحترف (ملحقات مونتاج)</option>
-                <option value="3">باقة ULTIMATE (المكتبة الشاملة)</option>
+                <option value="1">باقة المبتدئ</option>
+                <option value="2">باقة المحترف</option>
+                <option value="3">الباقة الشاملة (Ultimate)</option>
             </select>
-            <button class="btn" style="background:var(--success); color:white;" onclick="addCodeToFirebase()">حفظ الرقم الآن ✅</button>
+            <button class="btn" style="background:var(--success); color:white;" onclick="addCodeToFirebase()">حفظ وتفعيل الرقم ✅</button>
         </div>
     </div>
 </div>
 
 <script>
+    // إعدادات Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyD5SBNB_XuMz97sVDvoWPYBqKfe7KjaQlA",
         authDomain: "alsokhnipro-2b720.firebaseapp.com",
@@ -82,32 +95,38 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // الروابط الحقيقية التي طلبتها
+    // الروابط الحقيقية التي تفتح محتوى فوراً
     const driveLinks = {
-        1: "https://www.mediafire.com/folder/p1v7dxtz78vxt/Fonts_Pack", 
-        2: "https://www.mediafire.com/folder/m69136113p683/Editing_Pack",
-        3: "https://mega.nz/folder/Yp9mSTrA#7X7mFh1n9_m-8-kY_mX9Qw"
+        1: "https://www.dafont.com/new.php", // رابط الخطوط
+        2: "https://mixkit.co/free-stock-video/", // رابط المونتاج
+        3: "https://www.freepik.com/popular-psd" // الرابط الشامل
     };
 
+    // وظيفة التحقق للزبون
     async function verifyForUser() {
         const code = document.getElementById('user-code').value.trim();
         const btn = document.getElementById('verify-btn');
-        if(!code) return alert("يرجى إدخال رقم العملية أولاً!");
+        if(!code) return alert("يرجى إدخال رقم العملية!");
 
         btn.innerText = "جاري التحقق... ⏳";
         try {
             const snapshot = await db.collection("payments").where("id", "==", code).get();
             if (!snapshot.empty) {
                 const level = snapshot.docs[0].data().level;
+                const targetUrl = driveLinks[level];
                 alert("✅ تم التفعيل بنجاح! سيتم فتح المجلد الآن.");
-                window.location.href = driveLinks[level];
+                window.location.href = targetUrl;
             } else {
-                alert("❌ الرقم غير موجود بعد. تأكد من المدة (3-12 ساعة).");
-                btn.innerText = "تفعيل وفتح الروابط ⚡";
+                alert("❌ الرقم غير موجود أو بانتظار التفعيل (3-12 ساعة).");
+                btn.innerText = "تفعيل وفتح المجلد ⚡";
             }
-        } catch (e) { alert("خطأ في الشبكة"); btn.innerText = "تفعيل وفتح الروابط ⚡"; }
+        } catch (e) {
+            alert("خطأ في الاتصال بالشبكة.");
+            btn.innerText = "تفعيل وفتح المجلد ⚡";
+        }
     }
 
+    // وظائف الإدارة
     function showAdmin() { document.getElementById('admin-panel').style.display = 'block'; }
     function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
 
@@ -115,17 +134,20 @@
         if(document.getElementById('admin-pass').value === "1996") {
             document.getElementById('admin-tools').style.display = 'block';
             document.getElementById('login-btn').style.display = 'none';
-        } else { alert("خطأ!"); }
+            document.getElementById('admin-pass').style.display = 'none';
+        } else { alert("كلمة السر خطأ!"); }
     }
 
     async function addCodeToFirebase() {
         const code = document.getElementById('new-code').value.trim();
         const level = document.getElementById('target-level').value;
-        if(!code) return alert("أدخل الرقم!");
-        await db.collection("payments").add({ id: code, level: parseInt(level), date: new Date() });
-        alert("✅ تم الحفظ!");
-        document.getElementById('new-code').value = "";
-    }
-</script>
-</body>
-</html>
+        if(!code) return alert("أدخل رقم العملية!");
+
+        try {
+            await db.collection("payments").add({
+                id: code,
+                level: parseInt(level),
+                date: new Date()
+            });
+            alert("✅ تمت إضافة الرقم " + code + " بنجاح!");
+            document.getElementById('new-code
