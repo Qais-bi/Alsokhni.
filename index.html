@@ -7,28 +7,38 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <style>
-        :root { --primary: #e30613; --dark: #121212; --success: #28a745; --light-bg: #f4f7f6; --price-tag: #ff9800; }
+        :root { 
+            --primary: #e30613; --dark: #121212; --success: #28a745; --light-bg: #f4f7f6; 
+            --gold-grad: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --silver-grad: linear-gradient(135deg, #757f9a, #d7dde8, #bdc3c7, #e6e9f0, #757f9a);
+        }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-bg); margin: 0; text-align: center; color: #333; padding-bottom: 50px; }
         header { background: var(--dark); color: white; padding: 30px 20px; border-bottom: 5px solid var(--primary); }
         .container { padding: 20px; max-width: 500px; margin: auto; }
-        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #eee; transition: 0.3s; position: relative; }
-        .price-box { background: #fff3e0; border: 1px solid var(--price-tag); color: #e65100; padding: 8px 15px; border-radius: 12px; font-weight: bold; font-size: 14px; margin: 10px 0; display: inline-block; line-height: 1.4; }
-        .badge { display: inline-block; padding: 5px 12px; border-radius: 10px; font-size: 12px; font-weight: bold; margin-bottom: 10px; color: white; }
-        .bg-free { background: var(--success); }
-        .bg-pro { background: var(--primary); }
         
-        /* تنسيق قائمة المميزات */
-        .features-list { text-align: right; margin: 15px 0; padding: 0; list-style: none; font-size: 14px; color: #555; }
-        .features-list li { margin-bottom: 8px; display: flex; align-items: center; }
-        .features-list li::before { content: "✅"; margin-left: 8px; font-size: 12px; }
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #eee; position: relative; overflow: hidden; transition: 0.3s; }
+        
+        /* باقة المحترف الفضية */
+        .card-silver { background: var(--silver-grad) !important; border: 2px solid #bdc3c7 !important; color: #2c3e50 !important; }
+        .card-silver .price-box { background: rgba(255, 255, 255, 0.4) !important; color: #34495e !important; border-color: #7f8c8d !important; }
+        .card-silver .welcome-notice { background: rgba(255, 255, 255, 0.5) !important; border-color: #7f8c8d !important; color: #2c3e50 !important; }
 
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; display: block; text-decoration: none; margin-top: 10px; box-sizing: border-box; }
-        .btn-free { background: var(--success); color: white; }
-        .btn-activate { background: var(--dark); color: white; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 10px; text-align: center; font-size: 15px; box-sizing: border-box; }
-        .welcome-notice { font-size: 13px; color: #d32f2f; background: #fff8f8; padding: 12px; border-radius: 10px; border: 1px dashed var(--primary); margin-bottom: 10px; line-height: 1.5; }
+        /* باقة Ultimate الذهبية */
+        .card-gold { background: var(--gold-grad) !important; border: 2px solid #b38728 !important; color: #2c2100 !important; }
+        .card-gold .price-box { background: rgba(255, 255, 255, 0.3) !important; color: #5d4300 !important; border-color: #aa771c !important; }
+        .card-gold .welcome-notice { background: rgba(255, 255, 255, 0.4) !important; border-color: #aa771c !important; color: #443300 !important; }
+
+        .price-box { background: #fff3e0; border: 1px solid #ff9800; color: #e65100; padding: 8px 15px; border-radius: 12px; font-weight: bold; font-size: 14px; margin: 10px 0; display: inline-block; }
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 10px; font-size: 12px; font-weight: bold; margin-bottom: 10px; color: white; background: var(--primary); }
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; display: block; text-decoration: none; margin-top: 10px; box-sizing: border-box; }
+        .btn-activate { background: #333; color: white; }
+        
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid rgba(0,0,0,0.1); border-radius: 10px; text-align: center; font-size: 15px; box-sizing: border-box; }
+        .welcome-notice { font-size: 13px; padding: 12px; border-radius: 10px; border: 1px dashed var(--primary); margin-bottom: 10px; line-height: 1.5; }
+
+        /* لوحة الإدارة */
         .admin-hidden-trigger { background: none; border: none; color: var(--light-bg); font-size: 5px; cursor: pointer; position: fixed; bottom: 5px; right: 5px; z-index: 999; }
-        #admin-panel { display: none; background: white; padding: 25px; border-radius: 20px; border: 3px solid var(--dark); margin-top: 20px; border: 2px solid var(--dark); }
+        #admin-panel { display: none; background: white; padding: 25px; border-radius: 25px; border: 2px solid #000; margin-top: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
@@ -39,61 +49,29 @@
 </header>
 
 <div class="container">
-    
-    <h3 style="color: var(--success);">🎁 هدايا مجانية</h3>
-    <div class="card">
-        <span class="badge bg-free">مجاني</span>
-        <h4>حزمة الخطوط الأساسية</h4>
-        <div class="price-box">مجاني 100%</div>
-        <ul class="features-list">
-            <li>أكثر من 200 خط عربي مميز.</li>
-            <li>خطوط إنجليزية عصرية للتصميم.</li>
-            <li>رابط مباشر وسريع.</li>
-        </ul>
-        <a href="https://www.dafont.com/" target="_blank" class="btn btn-free">⬇️ تحميل مباشر</a>
-    </div>
 
-    <hr>
-    <h3 style="color: var(--primary);">💎 الباقات المدفوعة (Pro)</h3>
-    
     <div class="card">
-        <span class="badge bg-pro">باقة المبتدئ</span>
-        <div class="price-box">السعر: 25 ألف (قديم) / 250 ل.س (جديد)</div>
-        <ul class="features-list">
-            <li>مكتبة تضم 500+ ملف PSD مفتوح المصدر.</li>
-            <li>مجموعة فيكتور وأيقونات عالية الجودة.</li>
-            <li>خلفيات احترافية للمصممين.</li>
-        </ul>
-        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة ثم ادخل رقم العملية لتفعيل حسابك ❤</div>
-        <input type="text" id="code-1" placeholder="أدخل رقم العملية">
+        <span class="badge">باقة المبتدئ</span>
+        <div class="price-box">25 ألف (قديم) / 250 ل.س (جديد)</div>
+        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة للتفعيل ❤</div>
+        <input type="text" id="code-1" placeholder="رقم العملية">
         <button class="btn btn-activate" onclick="verifyPackage(1)">تفعيل الباقة ⚡</button>
     </div>
 
-    <div class="card">
-        <span class="badge bg-pro">باقة المحترف</span>
-        <div class="price-box">السعر: 45 ألف (قديم) / 450 ل.س (جديد)</div>
-        <ul class="features-list">
-            <li>كل ميزات باقة المبتدئ.</li>
-            <li>حقيبة المونتاج (انتقالات، صوتيات، وتأثيرات).</li>
-            <li>قوالب فيديو جاهزة للتعديل (After Effects & Premiere).</li>
-        </ul>
-        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة ثم ادخل رقم العملية لتفعيل حسابك ❤</div>
-        <input type="text" id="code-2" placeholder="أدخل رقم العملية">
-        <button class="btn btn-activate" onclick="verifyPackage(2)">تفعيل الباقة ⚡</button>
+    <div class="card card-silver">
+        <span class="badge" style="background:#555;">باقة المحترف 🥈</span>
+        <div class="price-box">45 ألف (قديم) / 450 ل.س (جديد)</div>
+        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة للتفعيل ❤</div>
+        <input type="text" id="code-2" placeholder="رقم العملية">
+        <button class="btn btn-activate" style="background:#2c3e50;" onclick="verifyPackage(2)">تفعيل الباقة الفضية 🥈</button>
     </div>
 
-    <div class="card" style="border: 2px solid var(--price-tag);">
-        <span class="badge bg-pro" style="background: var(--price-tag);">باقة Ultimate</span>
-        <div class="price-box">السعر: 70 ألف (قديم) / 700 ل.س (جديد)</div>
-        <ul class="features-list">
-            <li>الوصول الكامل لجميع ملفات المتجر.</li>
-            <li>مكتبة ضخمة من الصور الخام (Stock Photos).</li>
-            <li>تحديثات دورية للملحقات مجاناً.</li>
-            <li>رابط واحد شامل وسهل التحميل.</li>
-        </ul>
-        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة ثم ادخل رقم العملية لتفعيل حسابك ❤</div>
-        <input type="text" id="code-3" placeholder="أدخل رقم العملية">
-        <button class="btn btn-activate" onclick="verifyPackage(3)">تفعيل الباقة ⚡</button>
+    <div class="card card-gold">
+        <span class="badge" style="background:#000; color:#ffd700;">باقة Ultimate 👑</span>
+        <div class="price-box">70 ألف (قديم) / 700 ل.س (جديد)</div>
+        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة للتفعيل ❤</div>
+        <input type="text" id="code-3" placeholder="رقم العملية">
+        <button class="btn btn-activate" style="background:#2c2100;" onclick="verifyPackage(3)">تفعيل الباقة الذهبية 👑</button>
     </div>
 
     <div style="margin-top: 30px; padding: 15px; background: #eee; border-radius: 15px;">
@@ -102,24 +80,22 @@
     </div>
 
     <button class="admin-hidden-trigger" onclick="showAdmin()">Admin</button>
-    
     <div id="admin-panel">
-        <h4 onclick="closeAdmin()" style="cursor:pointer; color:red;">إغلاق X</h4>
-        <h4>🔐 لوحة الإدارة</h4>
+        <span style="color:red; cursor:pointer; font-weight:bold;" onclick="closeAdmin()">إغلاق X</span>
+        <h4 style="margin-top:10px;">🔐 لوحة الإدارة</h4>
         <div id="admin-login-section">
-            <input type="password" id="admin-pass" placeholder="كلمة السر">
-            <button class="btn" style="background:#444; color:white;" onclick="checkAdminPass()">دخول</button>
+            <input type="password" id="admin-pass" placeholder=". . . .">
+            <button class="btn btn-activate" onclick="checkAdminPass()">دخول</button>
         </div>
-
-        <div id="admin-tools" style="display:none; margin-top: 15px;">
+        <div id="admin-tools" style="display:none;">
             <hr>
-            <input type="text" id="new-code" placeholder="رقم العملية الجديد">
+            <input type="text" id="new-code" placeholder="رقم العملية">
             <select id="target-level">
                 <option value="1">باقة المبتدئ</option>
                 <option value="2">باقة المحترف</option>
                 <option value="3">باقة Ultimate</option>
             </select>
-            <button class="btn btn-free" onclick="addCodeToFirebase()">حفظ وتفعيل ✅</button>
+            <button class="btn" style="background:var(--success); color:white;" onclick="addCodeToFirebase()">✅ حفظ وتفعيل</button>
         </div>
     </div>
 </div>
@@ -134,34 +110,19 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // روابط بديلة آمنة لا تسبب حظر
     const driveLinks = {
-        1: "https://www.dafont.com/new.php", 
-        2: "https://mixkit.co/free-stock-video/", 
-        3: "https://www.freepik.com/popular-psd"
+        1: "https://www.1001freefonts.com/", 
+        2: "https://www.videezy.com/", 
+        3: "https://fonts.google.com/"
     };
-
-    async function verifyPackage(level) {
-        const inputId = "code-" + level;
-        const code = document.getElementById(inputId).value.trim();
-        if(!code) return alert("يرجى إدخال رقم العملية!");
-
-        try {
-            const snapshot = await db.collection("payments").where("id", "==", code).where("level", "==", level).get();
-            if (!snapshot.empty) {
-                alert("✅ تم التحقق بنجاح!");
-                window.location.href = driveLinks[level];
-            } else {
-                alert("❌ الرقم غير موجود أو بانتظار التأكيد (3-12 ساعة).");
-            }
-        } catch (e) { alert("خطأ في الاتصال"); }
-    }
 
     function showAdmin() { document.getElementById('admin-panel').style.display = 'block'; }
     function closeAdmin() { 
         document.getElementById('admin-panel').style.display = 'none';
+        document.getElementById('admin-pass').value = "";
         document.getElementById('admin-tools').style.display = 'none';
         document.getElementById('admin-login-section').style.display = 'block';
-        document.getElementById('admin-pass').value = "";
     }
 
     function checkAdminPass() {
@@ -173,15 +134,23 @@
 
     async function addCodeToFirebase() {
         const code = document.getElementById('new-code').value.trim();
-        const level = document.getElementById('target-level').value;
-        if(!code) return alert("أدخل الرقم!");
+        const level = parseInt(document.getElementById('target-level').value);
+        if(!code) return alert("يرجى إدخال رقم العملية!");
+        await db.collection("payments").add({ id: code, level: level, date: new Date() });
+        alert("✅ تم الحفظ بنجاح!");
+        closeAdmin();
+    }
 
-        try {
-            await db.collection("payments").add({ id: code, level: parseInt(level), date: new Date() });
-            alert("✅ تمت الإضافة بنجاح!");
-            closeAdmin();
-            document.getElementById('new-code').value = "";
-        } catch (e) { alert("خطأ في الحفظ!"); }
+    async function verifyPackage(level) {
+        const code = document.getElementById('code-' + level).value.trim();
+        if(!code) return alert("يرجى إدخال رقم العملية!");
+        const snapshot = await db.collection("payments").where("id", "==", code).where("level", "==", level).get();
+        if (!snapshot.empty) {
+            alert("✅ جاري فتح المجلد...");
+            window.location.href = driveLinks[level];
+        } else {
+            alert("❌ الرقم غير مفعل لهذه الباقة.");
+        }
     }
 </script>
 </body>
