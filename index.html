@@ -16,29 +16,33 @@
         header { background: var(--dark); color: white; padding: 30px 20px; border-bottom: 5px solid var(--primary); }
         .container { padding: 20px; max-width: 500px; margin: auto; }
         
-        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #eee; position: relative; overflow: hidden; transition: 0.3s; }
+        .card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #eee; position: relative; overflow: hidden; transition: 0.3s; }
         
         /* باقة المحترف الفضية */
         .card-silver { background: var(--silver-grad) !important; border: 2px solid #bdc3c7 !important; color: #2c3e50 !important; }
         .card-silver .price-box { background: rgba(255, 255, 255, 0.4) !important; color: #34495e !important; border-color: #7f8c8d !important; }
-        .card-silver .welcome-notice { background: rgba(255, 255, 255, 0.5) !important; border-color: #7f8c8d !important; color: #2c3e50 !important; }
-
+        
         /* باقة Ultimate الذهبية */
         .card-gold { background: var(--gold-grad) !important; border: 2px solid #b38728 !important; color: #2c2100 !important; }
         .card-gold .price-box { background: rgba(255, 255, 255, 0.3) !important; color: #5d4300 !important; border-color: #aa771c !important; }
-        .card-gold .welcome-notice { background: rgba(255, 255, 255, 0.4) !important; border-color: #aa771c !important; color: #443300 !important; }
 
         .price-box { background: #fff3e0; border: 1px solid #ff9800; color: #e65100; padding: 8px 15px; border-radius: 12px; font-weight: bold; font-size: 14px; margin: 10px 0; display: inline-block; }
         .badge { display: inline-block; padding: 5px 12px; border-radius: 10px; font-size: 12px; font-weight: bold; margin-bottom: 10px; color: white; background: var(--primary); }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; display: block; text-decoration: none; margin-top: 10px; box-sizing: border-box; }
+        .bg-free { background: var(--success) !important; }
+
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; display: block; text-decoration: none; margin-top: 15px; box-sizing: border-box; }
         .btn-activate { background: #333; color: white; }
+        .btn-download { background: var(--success); color: white; }
         
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid rgba(0,0,0,0.1); border-radius: 10px; text-align: center; font-size: 15px; box-sizing: border-box; }
-        .welcome-notice { font-size: 13px; padding: 12px; border-radius: 10px; border: 1px dashed var(--primary); margin-bottom: 10px; line-height: 1.5; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid rgba(0,0,0,0.1); border-radius: 10px; text-align: center; box-sizing: border-box; }
+        .promo-text { font-size: 14px; line-height: 1.6; margin: 10px 0; font-weight: 500; }
+        
+        .features-list { text-align: right; margin: 10px 0; padding: 0; list-style: none; font-size: 13px; }
+        .features-list li::before { content: "✔️ "; font-weight: bold; }
 
         /* لوحة الإدارة */
         .admin-hidden-trigger { background: none; border: none; color: var(--light-bg); font-size: 5px; cursor: pointer; position: fixed; bottom: 5px; right: 5px; z-index: 999; }
-        #admin-panel { display: none; background: white; padding: 25px; border-radius: 25px; border: 2px solid #000; margin-top: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        #admin-panel { display: none; background: white; padding: 25px; border-radius: 25px; border: 2px solid #000; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -50,33 +54,57 @@
 
 <div class="container">
 
+    <h3 style="color: var(--success);">🎁 هدايا مجانية (ابدأ الآن)</h3>
     <div class="card">
-        <span class="badge">باقة المبتدئ</span>
-        <div class="price-box">25 ألف (قديم) / 250 ل.س (جديد)</div>
-        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة للتفعيل ❤</div>
-        <input type="text" id="code-1" placeholder="رقم العملية">
-        <button class="btn btn-activate" onclick="verifyPackage(1)">تفعيل الباقة ⚡</button>
+        <span class="badge bg-free">مجاني للأبد</span>
+        <h4>حزمة أساسيات المصمم</h4>
+        <p class="promo-text">لا تبدأ من الصفر! حمل الآن أكثر من 200 خط عربي وعالمي مجاناً لتبدأ أولى خطواتك في عالم التصميم باحترافية.</p>
+        <a href="https://www.dafont.com/" target="_blank" class="btn btn-download">⬇️ تحميل سريع مجاناً</a>
+    </div>
+
+    <hr style="margin: 30px 0; border: 0; border-top: 2px dashed #ccc;">
+
+    <h3 style="color: var(--primary);">💎 باقات التميز المدفوعة</h3>
+
+    <div class="card">
+        <span class="badge">باقة المبتدئ (الأساسية)</span>
+        <div class="price-box">250 ل.س / 25 ألف</div>
+        <p class="promo-text">مثالية للمصممين الجدد. توفر لك ملفات PSD جاهزة للتعديل توفر عليك ساعات من العمل الشاق وتضمن لك نتائج مبهرة.</p>
+        <ul class="features-list">
+            <li>مكتبة صور عالية الدقة (Stock Photos).</li>
+            <li>ملفات فوتوشوب مفتوحة وسهلة التعديل.</li>
+        </ul>
+        <input type="text" id="code-1" placeholder="أدخل رقم العملية">
+        <button class="btn btn-activate" onclick="verifyPackage(1)">فتح عالم الإبداع ⚡</button>
     </div>
 
     <div class="card card-silver">
-        <span class="badge" style="background:#555;">باقة المحترف 🥈</span>
-        <div class="price-box">45 ألف (قديم) / 450 ل.س (جديد)</div>
-        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة للتفعيل ❤</div>
-        <input type="text" id="code-2" placeholder="رقم العملية">
-        <button class="btn btn-activate" style="background:#2c3e50;" onclick="verifyPackage(2)">تفعيل الباقة الفضية 🥈</button>
+        <span class="badge" style="background:#555;">باقة المحترف (Premium) 🥈</span>
+        <div class="price-box">450 ل.س / 45 ألف</div>
+        <p class="promo-text">انتقل بمونتاجك إلى مستوى السينما! حزمة كاملة من المؤثرات البصرية والصوتية التي تجعل فيديوهاتك تجذب الأنظار وتنافس المحترفين.</p>
+        <ul class="features-list">
+            <li>حقيبة المونتاج المتكاملة (Sound & VFX).</li>
+            <li>انتقالات احترافية لبرامج Premiere و After Effects.</li>
+        </ul>
+        <input type="text" id="code-2" placeholder="أدخل رقم العملية">
+        <button class="btn btn-activate" style="background:#2c3e50;" onclick="verifyPackage(2)">ترقية لمستوى المحترفين 🥈</button>
     </div>
 
     <div class="card card-gold">
-        <span class="badge" style="background:#000; color:#ffd700;">باقة Ultimate 👑</span>
-        <div class="price-box">70 ألف (قديم) / 700 ل.س (جديد)</div>
-        <div class="welcome-notice">اهلا بك ارسل النقود وانتظر من 3 إلى 12 ساعة للتفعيل ❤</div>
-        <input type="text" id="code-3" placeholder="رقم العملية">
-        <button class="btn btn-activate" style="background:#2c2100;" onclick="verifyPackage(3)">تفعيل الباقة الذهبية 👑</button>
+        <span class="badge" style="background:#000; color:#ffd700;">باقة Ultimate (V.I.P) 👑</span>
+        <div class="price-box">700 ل.س / 70 ألف</div>
+        <p class="promo-text">الخيار الملكي للمبدعين. احصل على كل شيء في المتجر، بالإضافة إلى تحديثات حصرية تصلك قبل الجميع ورابط واحد يجمع لك كل الكنوز.</p>
+        <ul class="features-list">
+            <li>وصول كامل وشامل لجميع ملفات المتجر.</li>
+            <li>أولوية الدعم الفني وتحديثات ملحقات مجانية دائماً.</li>
+        </ul>
+        <input type="text" id="code-3" placeholder="أدخل رقم العملية">
+        <button class="btn btn-activate" style="background:#2c2100;" onclick="verifyPackage(3)">امتلاك المتجر بالكامل 👑</button>
     </div>
 
     <div style="margin-top: 30px; padding: 15px; background: #eee; border-radius: 15px;">
         <p>للتواصل مع الادمن محمد قيس السخني:</p>
-        <a href="https://www.facebook.com/share/1D24b8PBQ7/" target="_blank" style="color: #1877f2; font-weight: bold; text-decoration: none;">🔗 صفحة الفيسبوك</a>
+        <a href="https://www.facebook.com/share/1D24b8PBQ7/" target="_blank" style="color: #1877f2; font-weight: bold; text-decoration: none;">🔗 صفحة الفيسبوك الرسمي</a>
     </div>
 
     <button class="admin-hidden-trigger" onclick="showAdmin()">Admin</button>
@@ -90,17 +118,18 @@
         <div id="admin-tools" style="display:none;">
             <hr>
             <input type="text" id="new-code" placeholder="رقم العملية">
-            <select id="target-level">
+            <select id="target-level" style="width:100%; padding:10px; border-radius:10px; margin-bottom:10px;">
                 <option value="1">باقة المبتدئ</option>
                 <option value="2">باقة المحترف</option>
                 <option value="3">باقة Ultimate</option>
             </select>
-            <button class="btn" style="background:var(--success); color:white;" onclick="addCodeToFirebase()">✅ حفظ وتفعيل</button>
+            <button class="btn" style="background:var(--success); color:white;" onclick="addCodeToFirebase()">✅ تفعيل الكود فوراً</button>
         </div>
     </div>
 </div>
 
 <script>
+    // إعدادات Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyD5SBNB_XuMz97sVDvoWPYBqKfe7KjaQlA",
         authDomain: "alsokhnipro-2b720.firebaseapp.com",
@@ -110,9 +139,8 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // روابط بديلة آمنة لا تسبب حظر
     const driveLinks = {
-        1: "https://www.1001freefonts.com/", 
+        1: "https://www.dafont.com/", 
         2: "https://www.videezy.com/", 
         3: "https://fonts.google.com/"
     };
@@ -120,7 +148,6 @@
     function showAdmin() { document.getElementById('admin-panel').style.display = 'block'; }
     function closeAdmin() { 
         document.getElementById('admin-panel').style.display = 'none';
-        document.getElementById('admin-pass').value = "";
         document.getElementById('admin-tools').style.display = 'none';
         document.getElementById('admin-login-section').style.display = 'block';
     }
@@ -129,27 +156,27 @@
         if(document.getElementById('admin-pass').value === "1996") {
             document.getElementById('admin-tools').style.display = 'block';
             document.getElementById('admin-login-section').style.display = 'none';
-        } else { alert("كلمة السر خطأ!"); }
+        } else { alert("خطأ!"); }
     }
 
     async function addCodeToFirebase() {
         const code = document.getElementById('new-code').value.trim();
         const level = parseInt(document.getElementById('target-level').value);
-        if(!code) return alert("يرجى إدخال رقم العملية!");
+        if(!code) return alert("أدخل الرقم!");
         await db.collection("payments").add({ id: code, level: level, date: new Date() });
-        alert("✅ تم الحفظ بنجاح!");
+        alert("✅ الكود الآن جاهز للاستخدام!");
         closeAdmin();
     }
 
     async function verifyPackage(level) {
         const code = document.getElementById('code-' + level).value.trim();
-        if(!code) return alert("يرجى إدخال رقم العملية!");
+        if(!code) return alert("أدخل رقم العملية أولاً!");
         const snapshot = await db.collection("payments").where("id", "==", code).where("level", "==", level).get();
         if (!snapshot.empty) {
-            alert("✅ جاري فتح المجلد...");
+            alert("✨ شكراً لثقتك! جاري التوجه للمجلد...");
             window.location.href = driveLinks[level];
         } else {
-            alert("❌ الرقم غير مفعل لهذه الباقة.");
+            alert("❌ هذا الرقم غير مفعل لهذه الباقة حالياً.");
         }
     }
 </script>
