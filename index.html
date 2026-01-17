@@ -13,7 +13,7 @@
             --silver-grad: linear-gradient(135deg, #757f9a, #d7dde8, #bdc3c7, #e6e9f0, #757f9a);
         }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-bg); margin: 0; text-align: center; color: #333; padding-bottom: 50px; }
-        header { background: var(--dark); color: white; padding: 30px 20px; border-bottom: 5px solid var(--primary); }
+        header { background: var(--dark); color: white; padding: 30px 20px; border-bottom: 5px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .container { padding: 20px; max-width: 500px; margin: auto; }
         .card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #eee; position: relative; }
         .card-silver { background: var(--silver-grad) !important; color: #2c3e50 !important; border: 2px solid #bdc3c7 !important; }
@@ -34,24 +34,18 @@
 
 <header>
     <h1>ALSOKHNI PRO 🚀</h1>
-    <p>المتجر الرسمي للمصمم قيس السخني</p>
+    <p>المحتوى الحصري للمصممين والمونتيرين</p>
 </header>
 
 <div class="container">
-    <div class="card">
-        <span class="badge" style="background: var(--success);">🎁 متاح مجاناً</span>
-        <h4>أساسيات المصمم (خطوط وأصوات)</h4>
-        <p style="font-size: 14px;">مكتبة تضم أكثر من 200 خط ومؤثر صوتي.</p>
-        <a href="https://fonts.google.com/" target="_blank" class="btn btn-go">⬇️ تحميل سريع مجاناً</a>
-    </div>
-
     <div class="card" id="pkg-1">
         <span class="badge">باقة المبتدئ</span>
         <div class="price-box">250 ل.س / 25 ألف</div>
+        <p style="font-size: 13px;">مكتبة تصاميم PSD وقوالب مفتوحة المصدر.</p>
         <div id="ui-1">
-            <div class="notice">📌 سيرياتيل كاش: <b>17273530</b><br>⏳ التفعيل: من <b>3 ظهراً - 6 مساءً</b> حصراً.</div>
+            <div class="notice">📌 سيرياتيل كاش: <b>17273530</b><br>⏳ التفعيل: <b>3 ظهراً - 6 مساءً</b>.</div>
             <input type="text" id="code-1" placeholder="رقم العملية">
-            <button class="btn btn-activate" id="btn-1" onclick="verifyPackage(1)">تفعيل الباقة ⚡</button>
+            <button class="btn btn-activate" id="btn-1" onclick="verifyPackage(1)">تفعيل الوصول ⚡</button>
             <div id="error-1" class="error-msg"></div>
         </div>
     </div>
@@ -59,10 +53,11 @@
     <div class="card card-silver" id="pkg-2">
         <span class="badge" style="background:#444;">باقة المحترف 🥈</span>
         <div class="price-box">450 ل.س / 45 ألف</div>
+        <p style="font-size: 13px;">حقيبة المونتاج: انتقالات VFX، مؤثرات صوتية، وفلاتر سينمائية.</p>
         <div id="ui-2">
-            <div class="notice">📌 الدفع لـ 17273530. التفعيل: من <b>3 ظهراً - 6 مساءً</b>.</div>
+            <div class="notice">📌 الدفع لـ 17273530. التفعيل: <b>3 ظهراً - 6 مساءً</b>.</div>
             <input type="text" id="code-2" placeholder="رقم العملية">
-            <button class="btn btn-activate" id="btn-2" style="background:#2c3e50;" onclick="verifyPackage(2)">ترقية للمستوى الفضي 🥈</button>
+            <button class="btn btn-activate" id="btn-2" style="background:#2c3e50;" onclick="verifyPackage(2)">فتح حقيبة المحترفين 🥈</button>
             <div id="error-2" class="error-msg"></div>
         </div>
     </div>
@@ -70,40 +65,42 @@
     <div class="card card-gold" id="pkg-3">
         <span class="badge" style="background:#000; color:#ffd700;">باقة Ultimate 👑</span>
         <div class="price-box">700 ل.س / 70 ألف</div>
+        <p style="font-size: 13px;">الأرشيف الملكي: وصول كامل لجميع الملحقات + تحديثات VIP.</p>
         <div id="ui-3">
-            <div class="notice">📌 الدفع لـ 17273530. تفعيل VIP: من <b>3 ظهراً - 6 مساءً</b>.</div>
+            <div class="notice">📌 الدفع لـ 17273530. تفعيل VIP: <b>3 ظهراً - 6 مساءً</b>.</div>
             <input type="text" id="code-3" placeholder="رقم العملية">
-            <button class="btn btn-activate" id="btn-3" style="background:#2c2100;" onclick="verifyPackage(3)">امتلاك المتجر بالكامل 👑</button>
+            <button class="btn btn-activate" id="btn-3" style="background:#2c2100;" onclick="verifyPackage(3)">امتلاك الأرشيف بالكامل 👑</button>
             <div id="error-3" class="error-msg"></div>
         </div>
     </div>
 
     <div style="margin-top: 20px; padding: 15px; background: #eee; border-radius: 15px;">
-        <p style="margin:0; font-size: 14px;">للتواصل مع محمد قيس السخني:</p>
-        <a href="https://www.facebook.com/share/1D24b8PBQ7/" target="_blank" style="color: #1877f2; font-weight: bold; text-decoration: none; font-size: 14px;">🔗 الفيسبوك الرسمي</a>
+        <p style="margin:0; font-size: 13px;">للتواصل مع محمد قيس السخني:</p>
+        <a href="https://www.facebook.com/share/1D24b8PBQ7/" target="_blank" style="color: #1877f2; font-weight: bold; text-decoration: none; font-size: 13px;">🔗 رابط الفيسبوك الرسمي</a>
     </div>
 
     <button class="admin-hidden-trigger" onclick="showAdmin()">Admin</button>
     <div id="admin-panel">
-        <h4>لوحة تحكم ALSOKHNI PRO</h4>
+        <h4>إدارة ALSOKHNI PRO</h4>
         <div id="admin-login-section">
             <input type="password" id="admin-pass" placeholder="كلمة السر">
             <button class="btn btn-activate" onclick="checkAdminPass()">دخول</button>
         </div>
         <div id="admin-tools" style="display:none;">
-            <input type="text" id="new-code" placeholder="رقم عملية الزبون">
+            <input type="text" id="new-code" placeholder="رقم العملية للزبون">
             <select id="target-level">
-                <option value="1">المبتدئ</option>
-                <option value="2">المحترف</option>
-                <option value="3">Ultimate</option>
+                <option value="1">باقة المبتدئ</option>
+                <option value="2">باقة المحترف</option>
+                <option value="3">باقة Ultimate</option>
             </select>
-            <button class="btn btn-go" onclick="addCodeToFirebase()">✅ تفعيل الكود</button>
+            <button class="btn btn-go" onclick="addCodeToFirebase()">✅ تفعيل وإضافة الكود</button>
             <button class="btn" style="background:#999;" onclick="closeAdmin()">إغلاق</button>
         </div>
     </div>
 </div>
 
 <script>
+    // Firebase Setup
     const firebaseConfig = {
         apiKey: "AIzaSyD5SBNB_XuMz97sVDvoWPYBqKfe7KjaQlA",
         authDomain: "alsokhnipro-2b720.firebaseapp.com",
@@ -113,25 +110,26 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // روابط تعمل فوراً (مباشرة)
+    // الروابط الفخمة والمباشرة لضمان حق الزبون
     const driveLinks = { 
-        1: "https://www.psdstack.com/category/freebies/", 
-        2: "https://vfxdownload.com/", 
-        3: "https://gfx-hub.cc/" 
+        1: "https://www.stickpng.com/cat/templates", 
+        2: "https://vfx.productioncrate.com/video-effects.html", 
+        3: "https://archive.org/details/design-assets-collection" 
     };
 
     let attempts = 0;
-
     function initApp() { checkSavedAccess(); checkBanStatus(); }
 
+    // بقاء الميزة مفتوحة
     function checkSavedAccess() {
         [1, 2, 3].forEach(level => {
             if (localStorage.getItem('access_pkg_' + level) === 'true') {
-                document.getElementById('ui-' + level).innerHTML = `<button class="btn btn-go" onclick="window.location.href='${driveLinks[level]}'">🚀 الانتقال للميزات</button>`;
+                document.getElementById('ui-' + level).innerHTML = `<button class="btn btn-go" onclick="window.location.href='${driveLinks[level]}'">🚀 الانتقال للمحتوى الحصري</button>`;
             }
         });
     }
 
+    // نظام الحظر
     function checkBanStatus() {
         const banTime = localStorage.getItem('ban_until');
         if (banTime && Date.now() < banTime) startBanCountdown(banTime);
@@ -151,18 +149,14 @@
                     localStorage.removeItem('ban_until');
                     attempts = 0;
                 } else {
-                    const h = Math.floor(rem / 3600000);
-                    const m = Math.floor((rem % 3600000) / 60000);
-                    const s = Math.floor((rem % 60000) / 1000);
-                    if (err) {
-                        err.style.display = 'block';
-                        err.innerHTML = `⚠️ حظر مؤقت! انتظر: ${h}س و ${m}د و ${s}ث`;
-                    }
+                    const h = Math.floor(rem / 3600000), m = Math.floor((rem % 3600000) / 60000), s = Math.floor((rem % 60000) / 1000);
+                    if (err) { err.style.display = 'block'; err.innerHTML = `⚠️ حظر مؤقت! انتظر: ${h}س ${m}د ${s}ث`; }
                 }
             }, 1000);
         });
     }
 
+    // تفعيل وحرق الكود
     async function verifyPackage(level) {
         if (localStorage.getItem('ban_until') && Date.now() < localStorage.getItem('ban_until')) return;
         const code = document.getElementById('code-' + level).value.trim();
@@ -173,7 +167,7 @@
         if (!snapshot.empty) {
             await db.collection("payments").doc(snapshot.docs[0].id).update({ used: true });
             localStorage.setItem('access_pkg_' + level, 'true');
-            alert("✅ تم التفعيل بنجاح!");
+            alert("✅ تم التفعيل بنجاح! حسابك مفعل دائماً.");
             checkSavedAccess();
         } else {
             attempts++;
@@ -181,24 +175,25 @@
                 const banTime = Date.now() + (3 * 60 * 60 * 1000);
                 localStorage.setItem('ban_until', banTime);
                 startBanCountdown(banTime);
-            } else { alert(`❌ رقم خاطئ! تبقى ${3 - attempts} محاولات.`); }
+            } else { alert(`❌ الكود غير صحيح! تبقى ${3 - attempts} محاولات.`); }
         }
     }
 
+    // الإدارة
     function showAdmin() { document.getElementById('admin-panel').style.display = 'block'; }
     function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
     function checkAdminPass() {
         if(document.getElementById('admin-pass').value === "1996") {
             document.getElementById('admin-tools').style.display = 'block';
             document.getElementById('admin-login-section').style.display = 'none';
-        } else { alert("خطأ!"); }
+        } else { alert("كلمة سر الإدارة خاطئة!"); }
     }
     async function addCodeToFirebase() {
         const code = document.getElementById('new-code').value.trim();
         const level = parseInt(document.getElementById('target-level').value);
-        if(!code) return alert("أدخل الكود!");
+        if(!code) return alert("أدخل رقم العملية!");
         await db.collection("payments").add({ id: code, level: level, used: false, date: new Date() });
-        alert("✅ تم الإضافة!");
+        alert("✅ تم تفعيل الكود للزبون!");
         document.getElementById('new-code').value = "";
     }
 </script>
