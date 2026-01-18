@@ -36,18 +36,24 @@
 
         .ui-box { background: rgba(0,0,0,0.03); padding: 20px; border-radius: 15px; margin-top: 15px; }
         .notice { font-size: 11px; font-weight: bold; color: #c62828; margin-bottom: 10px; border-right: 3px solid var(--primary); padding-right: 10px; text-align: right; line-height: 1.5; }
-        input { width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #ddd; text-align: center; font-size: 16px; margin-bottom: 10px; box-sizing: border-box; }
+        input, select { width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #ddd; text-align: center; font-size: 16px; margin-bottom: 10px; box-sizing: border-box; }
         
         .btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
         .btn-activate { background: var(--dark); color: white; }
         .btn-success { background: var(--success); color: white; }
+        .btn-danger { background: #d32f2f; color: white; padding: 8px; border-radius: 8px; font-size: 12px; width: auto; cursor: pointer; border: none; }
         
-        #admin-panel { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: white; padding: 30px; border-radius: 25px; border: 3px solid #000; box-shadow: 0 20px 50px rgba(0,0,0,0.3); z-index: 9999; width: 90%; max-width: 400px; }
+        /* لوحة الإدارة */
+        #admin-panel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 25px; border-radius: 25px; border: 3px solid #000; box-shadow: 0 20px 50px rgba(0,0,0,0.4); z-index: 9999; width: 90%; max-width: 450px; max-height: 80vh; overflow-y: auto; }
         .admin-trigger-area { position: fixed; bottom: 0; right: 0; width: 40px; height: 40px; background: transparent; border: none; cursor: default; z-index: 10000; outline: none; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; }
+        th, td { border: 1px solid #eee; padding: 10px; text-align: center; }
+        th { background: #f8f8f8; }
 
         .footer-link { margin-top: 40px; padding: 20px; border-top: 1px solid #ddd; }
         .footer-link a { color: #1877f2; text-decoration: none; font-weight: bold; font-size: 15px; }
-        .error-msg { color: #ffff00; background: #d32f2f; padding: 5px; border-radius: 5px; font-weight: bold; font-size: 12px; display: none; margin-top: 10px; }
+        .error-msg { color: #d32f2f; font-weight: bold; font-size: 12px; display: none; margin-top: 10px; background: #ffebee; padding: 5px; border-radius: 5px; }
     </style>
 </head>
 <body onload="initApp()">
@@ -77,8 +83,7 @@
         <div id="ui-1" class="ui-box">
             <div class="notice">
                 📌 ادفع سيرياتيل كاش لـ 17273530<br>
-                🕒 التفعيل بعد الدفع بـ 3 ساعات إلى 12 ساعة<br>
-                🕒 أوقات الدوام هي من 3 ظهراً للـ 6 مساءً
+                🕒 التفعيل بعد الدفع بـ 3 ساعات إلى 12 ساعة
             </div>
             <input type="text" id="code-1" placeholder="رقم عملية التحويل">
             <button class="btn btn-activate" id="btn-1" onclick="verifyPackage(1)">تفعيل الوصول ⚡</button>
@@ -94,7 +99,6 @@
             <li>كل ميزات الباقة البرونزية.</li>
             <li>حقيبة انتقالات VFX (دخان، نار، مؤثرات).</li>
             <li>مكتبة المؤثرات الصوتية السينمائية.</li>
-            <li>فلاتر تصحيح ألوان (LUTs).</li>
         </ul>
         <div id="ui-2" class="ui-box">
             <div class="notice">
@@ -115,7 +119,6 @@
             <li>الوصول الشامل لجميع الباقات السابقة.</li>
             <li>أرشيف السخني الخاص (تحديثات أسبوعية).</li>
             <li>كورس أسرار المونتاج السريع.</li>
-            <li>دعم فني خاص وأولوية قصوى.</li>
         </ul>
         <div id="ui-3" class="ui-box">
             <div class="notice">
@@ -135,26 +138,45 @@
     <button class="admin-trigger-area" onclick="showAdmin()"></button>
 
     <div id="admin-panel">
-        <h3>لوحة إدارة السخني</h3>
+        <h3>لوحة إدارة السخني ⚙️</h3>
         <div id="admin-login">
             <input type="password" id="admin-pass" placeholder="كلمة السر">
             <button class="btn btn-activate" onclick="checkAdminPass()">دخول</button>
+            <button class="btn" style="background:#ccc; margin-top:10px" onclick="closeAdmin()">إغلاق</button>
         </div>
+        
         <div id="admin-tools" style="display:none;">
-            <input type="text" id="new-code" placeholder="رقم عملية جديد">
-            <select id="target-level" style="width:100%; padding:10px; margin-bottom:10px; border-radius:10px;">
-                <option value="1">البرونزية</option>
-                <option value="2">الفضية</option>
-                <option value="3">الذهبية</option>
-            </select>
-            <button class="btn btn-success" onclick="addCodeToFirebase()">✅ إضافة كود للقاعدة</button>
-            <button class="btn" style="background:#999; margin-top:10px;" onclick="closeAdmin()">إغلاق</button>
+            <div style="background:#f4f4f4; padding:10px; border-radius:10px; margin-bottom:15px;">
+                <h4 style="margin:5px 0">إضافة كود جديد</h4>
+                <input type="text" id="new-code" placeholder="رقم عملية جديد">
+                <select id="target-level">
+                    <option value="1">البرونزية</option>
+                    <option value="2">الفضية</option>
+                    <option value="3">الذهبية</option>
+                </select>
+                <button class="btn btn-success" onclick="addCodeToFirebase()">✅ تفعيل الكود</button>
+            </div>
+
+            <h4 style="margin:10px 0">الحسابات المفعلة</h4>
+            <div style="overflow-x:auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>رقم العملية</th>
+                            <th>الباقة</th>
+                            <th>إلغاء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body">
+                        </tbody>
+                </table>
+            </div>
+            <button class="btn" style="background:#999; margin-top:15px;" onclick="closeAdmin()">إغلاق اللوحة</button>
         </div>
     </div>
 </div>
 
 <script>
-    // إعدادات Firebase الخاصة بك
     const firebaseConfig = {
         apiKey: "AIzaSyD5SBNB_XuMz97sVDvoWPYBqKfe7KjaQlA",
         authDomain: "alsokhnipro-2b720.firebaseapp.com",
@@ -164,36 +186,22 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // روابط التحميل الحقيقية (تعدل من هنا)
-    const driveLinks = { 
-        1: "https://www.stickpng.com/cat/templates", 
-        2: "https://vfx.productioncrate.com/video-effects.html", 
-        3: "https://archive.org/details/design-assets-collection" 
-    };
-
+    const driveLinks = { 1: "https://www.stickpng.com/cat/templates", 2: "https://vfx.productioncrate.com/video-effects.html", 3: "https://archive.org/details/design-assets-collection" };
     let attempts = 0;
 
-    function initApp() { 
-        checkSavedAccess(); 
-        checkBanStatus(); 
-    }
+    function initApp() { checkSavedAccess(); checkBanStatus(); }
 
-    // التحقق من وجود وصول سابق مخزن في المتصفح
     function checkSavedAccess() {
         [1, 2, 3].forEach(level => {
             if (localStorage.getItem('access_pkg_' + level) === 'true') {
-                const uiBox = document.getElementById('ui-' + level);
-                uiBox.innerHTML = `<button class="btn btn-success" onclick="window.open('${driveLinks[level]}', '_blank')">🚀 دخول للمجلد (مفعل للأبد)</button>`;
+                document.getElementById('ui-' + level).innerHTML = `<button class="btn btn-success" onclick="window.location.href='${driveLinks[level]}'">🚀 دخول (مفعل للأبد)</button>`;
             }
         });
     }
 
-    // نظام الحظر في حال المحاولات الخاطئة
     function checkBanStatus() {
         const banTime = localStorage.getItem('ban_until');
-        if (banTime && Date.now() < banTime) {
-            startBanCountdown(parseInt(banTime));
-        }
+        if (banTime && Date.now() < banTime) startBanCountdown(banTime);
     }
 
     function startBanCountdown(until) {
@@ -201,7 +209,6 @@
             const btn = document.getElementById('btn-' + i);
             const err = document.getElementById('error-' + i);
             if (btn) btn.disabled = true;
-            
             const timer = setInterval(() => {
                 const rem = until - Date.now();
                 if (rem <= 0) {
@@ -211,63 +218,36 @@
                     localStorage.removeItem('ban_until');
                     attempts = 0;
                 } else {
-                    const m = Math.floor((rem % 3600000) / 60000);
-                    const s = Math.floor((rem % 60000) / 1000);
-                    if (err) { 
-                        err.style.display = 'block'; 
-                        err.innerHTML = `⚠️ محاولات خاطئة كثيرة! انتظر: ${m}:${s}`; 
-                    }
+                    const m = Math.floor((rem % 3600000) / 60000), s = Math.floor((rem % 60000) / 1000);
+                    if (err) { err.style.display = 'block'; err.innerHTML = `⚠️ حظر مؤقت! انتظر: ${m}:${s}`; }
                 }
             }, 1000);
         });
     }
 
-    // التحقق من الكود عبر Firebase
     async function verifyPackage(level) {
         if (localStorage.getItem('ban_until')) return;
-        
-        const codeInput = document.getElementById('code-' + level);
-        const code = codeInput.value.trim();
-        
-        if(!code) return alert("يرجى إدخال رقم العملية أولاً!");
+        const code = document.getElementById('code-' + level).value.trim();
+        if(!code) return alert("حط رقم العملية أولاً!");
 
-        try {
-            // البحث عن الكود في قاعدة البيانات
-            const snapshot = await db.collection("payments")
-                .where("id", "==", code)
-                .where("level", "==", level)
-                .where("used", "==", false)
-                .get();
+        const snapshot = await db.collection("payments").where("id", "==", code).where("level", "==", level).where("used", "==", false).get();
 
-            if (!snapshot.empty) {
-                // تفعيل الكود ووسمه كـ "مستخدم"
-                const docId = snapshot.docs[0].id;
-                await db.collection("payments").doc(docId).update({ 
-                    used: true,
-                    usedAt: new Date(),
-                    userDevice: navigator.userAgent
-                });
-
-                localStorage.setItem('access_pkg_' + level, 'true');
-                alert("✅ مبروك! تم تفعيل الباقة بنجاح.");
-                checkSavedAccess();
-            } else {
-                attempts++;
-                if (attempts >= 3) {
-                    const banTime = Date.now() + (3 * 60 * 60 * 1000); // حظر 3 ساعات
-                    localStorage.setItem('ban_until', banTime);
-                    startBanCountdown(banTime);
-                } else { 
-                    alert(`❌ رقم العملية غير صحيح أو تم استخدامه مسبقاً! تبقى لك ${3 - attempts} محاولات.`); 
-                }
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("حدث خطأ في الاتصال بالسيرفر!");
+        if (!snapshot.empty) {
+            await db.collection("payments").doc(snapshot.docs[0].id).update({ used: true });
+            localStorage.setItem('access_pkg_' + level, 'true');
+            alert("✅ تم التفعيل بنجاح!");
+            location.reload();
+        } else {
+            attempts++;
+            if (attempts >= 3) {
+                const banTime = Date.now() + (3 * 60 * 60 * 1000);
+                localStorage.setItem('ban_until', banTime);
+                startBanCountdown(banTime);
+            } else { alert(`❌ الكود غلط! معك ${3 - attempts} محاولات.`); }
         }
     }
 
-    // وظائف لوحة الإدارة
+    // إدارة الأدمن
     function showAdmin() { document.getElementById('admin-panel').style.display = 'block'; }
     function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
     
@@ -275,22 +255,42 @@
         if(document.getElementById('admin-pass').value === "1996") {
             document.getElementById('admin-tools').style.display = 'block';
             document.getElementById('admin-login').style.display = 'none';
-        } else { alert("كلمة السر غلط!"); }
+            fetchAccounts();
+        } else { alert("غلط!"); }
     }
 
     async function addCodeToFirebase() {
         const code = document.getElementById('new-code').value.trim();
         const level = parseInt(document.getElementById('target-level').value);
-        if(!code) return alert("اكتب الكود!");
-        
-        await db.collection("payments").add({ 
-            id: code, 
-            level: level, 
-            used: false, 
-            date: new Date() 
-        });
-        alert("✅ الكود صار جاهز للاستخدام من قبل الزبون!");
+        if(!code) return alert("حط كود!");
+        await db.collection("payments").add({ id: code, level: level, used: false, date: new Date() });
+        alert("✅ تم تفعيل الكود بنجاح!");
         document.getElementById('new-code').value = "";
+        fetchAccounts();
+    }
+
+    async function fetchAccounts() {
+        const tbody = document.getElementById('admin-table-body');
+        tbody.innerHTML = "جاري التحميل...";
+        const snapshot = await db.collection("payments").orderBy("date", "desc").get();
+        tbody.innerHTML = "";
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const row = `<tr>
+                <td>${data.id}</td>
+                <td>${data.level == 1 ? 'برونز' : data.level == 2 ? 'فضة' : 'ذهبية'}</td>
+                <td><button class="btn-danger" onclick="deleteAccount('${doc.id}')">إلغاء</button></td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+
+    async function deleteAccount(docId) {
+        if(confirm("هل تريد إلغاء تفعيل هذا الحساب نهائياً؟")) {
+            await db.collection("payments").doc(docId).delete();
+            alert("تم الحذف.");
+            fetchAccounts();
+        }
     }
 </script>
 </body>
