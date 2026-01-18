@@ -17,43 +17,26 @@
         header { background: var(--dark); color: white; padding: 40px 20px; border-bottom: 5px solid var(--primary); }
         header h1 { margin: 0; font-size: 35px; }
         .container { padding: 20px; max-width: 550px; margin: auto; }
-        
-        .free-gift-box { background: white; border: 2px dashed var(--success); border-radius: 20px; padding: 20px; margin-bottom: 30px; }
-        .btn-free { background: var(--success); color: white; padding: 12px; border-radius: 10px; text-decoration: none; display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px; }
-
         .card { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px; border: 1px solid #eee; position: relative; overflow: hidden; }
         .card-bronze { background: var(--bronze-grad) !important; color: white !important; }
         .card-silver { background: var(--silver-grad) !important; color: #2c3e50 !important; }
         .card-gold { background: var(--gold-grad) !important; color: #2c2100 !important; }
-        
         .badge { display: inline-block; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; background: var(--primary); color: white; margin-bottom: 15px; }
         .price-tag { font-size: 28px; font-weight: bold; margin-bottom: 5px; }
-        .forever-tag { font-size: 13px; font-weight: bold; color: #d32f2f; background: rgba(255,255,255,0.7); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(211, 47, 47, 0.2); }
-
-        .features { text-align: right; margin: 20px 0; padding: 0; list-style: none; }
-        .features li { margin-bottom: 10px; font-size: 14px; display: flex; align-items: center; }
-        .features li::before { content: "✔️"; margin-left: 10px; color: var(--success); }
-
-        .ui-box { background: rgba(0,0,0,0.03); padding: 20px; border-radius: 15px; margin-top: 15px; }
-        .notice { font-size: 11px; font-weight: bold; color: #c62828; margin-bottom: 10px; border-right: 3px solid var(--primary); padding-right: 10px; text-align: right; line-height: 1.5; }
-        input, select { width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #ddd; text-align: center; font-size: 16px; margin-bottom: 10px; box-sizing: border-box; }
-        
+        .forever-tag { font-size: 13px; font-weight: bold; color: #d32f2f; background: rgba(255,255,255,0.7); padding: 4px 12px; border-radius: 8px; }
+        .ui-box { background: rgba(0,0,0,0.05); padding: 20px; border-radius: 15px; margin-top: 15px; }
+        .notice { font-size: 11px; font-weight: bold; color: #c62828; margin-bottom: 10px; text-align: right; line-height: 1.5; }
+        input, select { width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #ddd; text-align: center; margin-bottom: 10px; box-sizing: border-box; }
         .btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
         .btn-activate { background: var(--dark); color: white; }
         .btn-success { background: var(--success); color: white; }
-        .btn-danger { background: #d32f2f; color: white; padding: 8px; border-radius: 8px; font-size: 12px; width: auto; cursor: pointer; border: none; }
-        
-        /* لوحة الإدارة */
-        #admin-panel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 25px; border-radius: 25px; border: 3px solid #000; box-shadow: 0 20px 50px rgba(0,0,0,0.4); z-index: 9999; width: 90%; max-width: 450px; max-height: 80vh; overflow-y: auto; }
-        .admin-trigger-area { position: fixed; bottom: 0; right: 0; width: 40px; height: 40px; background: transparent; border: none; cursor: default; z-index: 10000; outline: none; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; }
-        th, td { border: 1px solid #eee; padding: 10px; text-align: center; }
-        th { background: #f8f8f8; }
-
+        .btn-danger { background: #d32f2f; color: white; padding: 5px; border-radius: 5px; border: none; cursor: pointer; }
+        #admin-panel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 25px; border-radius: 25px; border: 3px solid #000; z-index: 9999; width: 90%; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); max-height: 80vh; overflow-y: auto; }
+        .admin-trigger-area { position: fixed; bottom: 0; right: 0; width: 40px; height: 40px; background: transparent; border: none; z-index: 10000; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; color: #333; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
         .footer-link { margin-top: 40px; padding: 20px; border-top: 1px solid #ddd; }
-        .footer-link a { color: #1877f2; text-decoration: none; font-weight: bold; font-size: 15px; }
-        .error-msg { color: #d32f2f; font-weight: bold; font-size: 12px; display: none; margin-top: 10px; background: #ffebee; padding: 5px; border-radius: 5px; }
+        .footer-link a { color: #1877f2; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body onload="initApp()">
@@ -64,70 +47,33 @@
 </header>
 
 <div class="container">
-
-    <div class="free-gift-box">
-        <h3 style="color:var(--success)">🎁 ميزات مجانية (للبداية)</h3>
-        <a href="https://fonts.google.com/" target="_blank" class="btn-free">📂 تحميل حزمة الـ 500 خط بريميوم</a>
-        <a href="https://freesound.org/" target="_blank" class="btn-free">🎵 مكتبة المؤثرات الصوتية الأساسية</a>
-    </div>
-    
     <div class="card card-bronze" id="pkg-1">
         <span class="badge">باقة المبتدئ 🥉</span>
         <div class="price-tag">25,000 ل.س</div>
-        <div class="forever-tag">امتلك الميزات للأبد ♾️</div>
-        <ul class="features">
-            <li>خطوط السخني الاحترافية (عربي/إنجليزي).</li>
-            <li>حقيبة ملحقات PSD للتصاميم السريعة.</li>
-            <li>أيقونات وصور PNG شفافة عالية الدقة.</li>
-        </ul>
         <div id="ui-1" class="ui-box">
-            <div class="notice">
-                📌 ادفع سيرياتيل كاش لـ 17273530<br>
-                🕒 التفعيل بعد الدفع بـ 3 ساعات إلى 12 ساعة
-            </div>
+            <div class="notice">📌 ادفع سيرياتيل كاش لـ 17273530<br>🕒 التفعيل 3-12 ساعة | الدوام 3-6 مساءً</div>
             <input type="text" id="code-1" placeholder="رقم عملية التحويل">
             <button class="btn btn-activate" id="btn-1" onclick="verifyPackage(1)">تفعيل الوصول ⚡</button>
-            <div id="error-1" class="error-msg"></div>
         </div>
     </div>
 
     <div class="card card-silver" id="pkg-2">
         <span class="badge" style="background:#333;">باقة المحترف 🥈</span>
         <div class="price-tag">45,000 ل.س</div>
-        <div class="forever-tag">امتلك الميزات للأبد ♾️</div>
-        <ul class="features">
-            <li>كل ميزات الباقة البرونزية.</li>
-            <li>حقيبة انتقالات VFX (دخان، نار، مؤثرات).</li>
-            <li>مكتبة المؤثرات الصوتية السينمائية.</li>
-        </ul>
         <div id="ui-2" class="ui-box">
-            <div class="notice">
-                📌 ادفع سيرياتيل كاش لـ 17273530<br>
-                🕒 التفعيل بعد الدفع بـ 3 ساعات إلى 12 ساعة
-            </div>
+            <div class="notice">📌 ادفع سيرياتيل كاش لـ 17273530<br>🕒 التفعيل 3-12 ساعة | الدوام 3-6 مساءً</div>
             <input type="text" id="code-2" placeholder="رقم عملية التحويل">
             <button class="btn btn-activate" id="btn-2" style="background:#2c3e50;" onclick="verifyPackage(2)">ترقية الحساب 🥈</button>
-            <div id="error-2" class="error-msg"></div>
         </div>
     </div>
 
     <div class="card card-gold" id="pkg-3">
         <span class="badge" style="background:#000; color:#ffd700;">باقة Ultimate الملكية 👑</span>
         <div class="price-tag">70,000 ل.س</div>
-        <div class="forever-tag">امتلك الميزات للأبد ♾️</div>
-        <ul class="features">
-            <li>الوصول الشامل لجميع الباقات السابقة.</li>
-            <li>أرشيف السخني الخاص (تحديثات أسبوعية).</li>
-            <li>كورس أسرار المونتاج السريع.</li>
-        </ul>
         <div id="ui-3" class="ui-box">
-            <div class="notice">
-                📌 ادفع سيرياتيل كاش لـ 17273530<br>
-                🕒 التفعيل بعد الدفع بـ 3 ساعات إلى 12 ساعة
-            </div>
+            <div class="notice">📌 ادفع سيرياتيل كاش لـ 17273530<br>🕒 التفعيل 3-12 ساعة | الدوام 3-6 مساءً</div>
             <input type="text" id="code-3" placeholder="رقم عملية التحويل">
             <button class="btn btn-activate" id="btn-3" style="background:#2c2100;" onclick="verifyPackage(3)">امتلاك الأرشيف الملكي 👑</button>
-            <div id="error-3" class="error-msg"></div>
         </div>
     </div>
 
@@ -142,36 +88,19 @@
         <div id="admin-login">
             <input type="password" id="admin-pass" placeholder="كلمة السر">
             <button class="btn btn-activate" onclick="checkAdminPass()">دخول</button>
-            <button class="btn" style="background:#ccc; margin-top:10px" onclick="closeAdmin()">إغلاق</button>
         </div>
-        
         <div id="admin-tools" style="display:none;">
-            <div style="background:#f4f4f4; padding:10px; border-radius:10px; margin-bottom:15px;">
-                <h4 style="margin:5px 0">إضافة كود جديد</h4>
-                <input type="text" id="new-code" placeholder="رقم عملية جديد">
-                <select id="target-level">
-                    <option value="1">البرونزية</option>
-                    <option value="2">الفضية</option>
-                    <option value="3">الذهبية</option>
-                </select>
-                <button class="btn btn-success" onclick="addCodeToFirebase()">✅ تفعيل الكود</button>
-            </div>
-
-            <h4 style="margin:10px 0">الحسابات المفعلة</h4>
-            <div style="overflow-x:auto">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>رقم العملية</th>
-                            <th>الباقة</th>
-                            <th>إلغاء</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-table-body">
-                        </tbody>
-                </table>
-            </div>
-            <button class="btn" style="background:#999; margin-top:15px;" onclick="closeAdmin()">إغلاق اللوحة</button>
+            <input type="text" id="new-code" placeholder="رقم العملية">
+            <select id="target-level">
+                <option value="1">البرونزية</option>
+                <option value="2">الفضية</option>
+                <option value="3">الذهبية</option>
+            </select>
+            <button class="btn btn-success" onclick="addCodeToFirebase()">✅ تفعيل الكود للزبون</button>
+            <hr>
+            <h4>الأكواد المفعلة حالياً</h4>
+            <div id="admin-list">جاري التحميل...</div>
+            <button class="btn" style="background:#999; margin-top:10px" onclick="closeAdmin()">إغلاق اللوحة</button>
         </div>
     </div>
 </div>
@@ -186,47 +115,32 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    const driveLinks = { 1: "https://www.stickpng.com/cat/templates", 2: "https://vfx.productioncrate.com/video-effects.html", 3: "https://archive.org/details/design-assets-collection" };
+    const driveLinks = { 
+        1: "https://www.stickpng.com/cat/templates", 
+        2: "https://vfx.productioncrate.com/video-effects.html", 
+        3: "https://archive.org/details/design-assets-collection" 
+    };
+
     let attempts = 0;
 
-    function initApp() { checkSavedAccess(); checkBanStatus(); }
+    function initApp() { checkSavedAccess(); }
 
-    function checkSavedAccess() {
-        [1, 2, 3].forEach(level => {
-            if (localStorage.getItem('access_pkg_' + level) === 'true') {
-                document.getElementById('ui-' + level).innerHTML = `<button class="btn btn-success" onclick="window.location.href='${driveLinks[level]}'">🚀 دخول (مفعل للأبد)</button>`;
-            }
-        });
-    }
-
-    function checkBanStatus() {
-        const banTime = localStorage.getItem('ban_until');
-        if (banTime && Date.now() < banTime) startBanCountdown(banTime);
-    }
-
-    function startBanCountdown(until) {
-        [1, 2, 3].forEach(i => {
-            const btn = document.getElementById('btn-' + i);
-            const err = document.getElementById('error-' + i);
-            if (btn) btn.disabled = true;
-            const timer = setInterval(() => {
-                const rem = until - Date.now();
-                if (rem <= 0) {
-                    clearInterval(timer);
-                    if (btn) btn.disabled = false;
-                    if (err) err.style.display = 'none';
-                    localStorage.removeItem('ban_until');
-                    attempts = 0;
+    async function checkSavedAccess() {
+        for (let level = 1; level <= 3; level++) {
+            const savedCode = localStorage.getItem('active_code_pkg_' + level);
+            if (savedCode) {
+                // التحقق من الداتابيز لضمان الأمان
+                const snapshot = await db.collection("payments").where("id", "==", savedCode).where("level", "==", level).get();
+                if (!snapshot.empty) {
+                    document.getElementById('ui-' + level).innerHTML = `<button class="btn btn-success" onclick="window.open('${driveLinks[level]}', '_blank')">🚀 دخول (مفعل للأبد)</button>`;
                 } else {
-                    const m = Math.floor((rem % 3600000) / 60000), s = Math.floor((rem % 60000) / 1000);
-                    if (err) { err.style.display = 'block'; err.innerHTML = `⚠️ حظر مؤقت! انتظر: ${m}:${s}`; }
+                    localStorage.removeItem('active_code_pkg_' + level);
                 }
-            }, 1000);
-        });
+            }
+        }
     }
 
     async function verifyPackage(level) {
-        if (localStorage.getItem('ban_until')) return;
         const code = document.getElementById('code-' + level).value.trim();
         if(!code) return alert("حط رقم العملية أولاً!");
 
@@ -234,62 +148,52 @@
 
         if (!snapshot.empty) {
             await db.collection("payments").doc(snapshot.docs[0].id).update({ used: true });
-            localStorage.setItem('access_pkg_' + level, 'true');
-            alert("✅ تم التفعيل بنجاح!");
+            localStorage.setItem('active_code_pkg_' + level, code);
+            alert("✅ تم تفعيل الميزة بنجاح!");
             location.reload();
         } else {
             attempts++;
             if (attempts >= 3) {
-                const banTime = Date.now() + (3 * 60 * 60 * 1000);
-                localStorage.setItem('ban_until', banTime);
-                startBanCountdown(banTime);
-            } else { alert(`❌ الكود غلط! معك ${3 - attempts} محاولات.`); }
+                alert("❌ محاولات خاطئة كثيرة!");
+            } else { alert("❌ الكود غلط أو مستخدم مسبقاً!"); }
         }
     }
 
-    // إدارة الأدمن
     function showAdmin() { document.getElementById('admin-panel').style.display = 'block'; }
     function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
-    
     function checkAdminPass() {
         if(document.getElementById('admin-pass').value === "1996") {
             document.getElementById('admin-tools').style.display = 'block';
             document.getElementById('admin-login').style.display = 'none';
             fetchAccounts();
-        } else { alert("غلط!"); }
+        } else { alert("كلمة سر الأدمن غلط!"); }
     }
 
     async function addCodeToFirebase() {
         const code = document.getElementById('new-code').value.trim();
         const level = parseInt(document.getElementById('target-level').value);
-        if(!code) return alert("حط كود!");
+        if(!code) return alert("حط الكود!");
         await db.collection("payments").add({ id: code, level: level, used: false, date: new Date() });
-        alert("✅ تم تفعيل الكود بنجاح!");
-        document.getElementById('new-code').value = "";
+        alert("✅ تم إضافة الكود لقاعدة البيانات!");
         fetchAccounts();
     }
 
     async function fetchAccounts() {
-        const tbody = document.getElementById('admin-table-body');
-        tbody.innerHTML = "جاري التحميل...";
-        const snapshot = await db.collection("payments").orderBy("date", "desc").get();
-        tbody.innerHTML = "";
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            const row = `<tr>
-                <td>${data.id}</td>
-                <td>${data.level == 1 ? 'برونز' : data.level == 2 ? 'فضة' : 'ذهبية'}</td>
-                <td><button class="btn-danger" onclick="deleteAccount('${doc.id}')">إلغاء</button></td>
-            </tr>`;
-            tbody.innerHTML += row;
+        const listDiv = document.getElementById('admin-list');
+        const snap = await db.collection("payments").orderBy("date", "desc").limit(15).get();
+        let html = "<table><tr><th>الكود</th><th>باقة</th><th>حذف</th></tr>";
+        snap.forEach(doc => {
+            const d = doc.data();
+            const pName = d.level == 1 ? "برونز" : d.level == 2 ? "فضة" : "ذهب";
+            html += `<tr><td>${d.id}</td><td>${pName}</td><td><button class="btn-danger" onclick="deleteAcc('${doc.id}')">X</button></td></tr>`;
         });
+        listDiv.innerHTML = html + "</table>";
     }
 
-    async function deleteAccount(docId) {
-        if(confirm("هل تريد إلغاء تفعيل هذا الحساب نهائياً؟")) {
-            await db.collection("payments").doc(docId).delete();
-            alert("تم الحذف.");
-            fetchAccounts();
+    async function deleteAcc(id) {
+        if(confirm("هل تريد حذف هذا التفعيل؟")) { 
+            await db.collection("payments").doc(id).delete(); 
+            fetchAccounts(); 
         }
     }
 </script>
