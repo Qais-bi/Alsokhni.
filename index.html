@@ -3,111 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alsokhni Pro | متجر المونتاج</title>
+    <title>Alsokhni Pro | المتجر الرسمي</title>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <style>
         :root { 
-            --primary: #e30613; --dark: #121212; --success: #28a745; --light-bg: #f8f9fa; 
-            --gold-grad: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --primary: #e30613; --dark: #121212; --success: #28a745; --light-bg: #f4f7f6; 
+            --bronze-grad: linear-gradient(135deg, #804a00, #b08d57, #cd7f32, #a0522d, #804a00);
             --silver-grad: linear-gradient(135deg, #757f9a, #d7dde8, #bdc3c7, #e6e9f0, #757f9a);
+            --gold-grad: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
         }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-bg); margin: 0; text-align: center; color: #333; padding-bottom: 50px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-bg); margin: 0; text-align: center; color: #333; padding-bottom: 70px; }
         header { background: var(--dark); color: white; padding: 40px 20px; border-bottom: 5px solid var(--primary); }
-        header h1 { margin: 0; font-size: 32px; letter-spacing: 1px; }
-        .container { padding: 20px; max-width: 500px; margin: auto; }
+        header h1 { margin: 0; font-size: 35px; }
+        .container { padding: 20px; max-width: 550px; margin: auto; }
         
-        /* قسم الطعم - الميزات المجانية */
-        .free-section { background: #fff; border: 2px solid var(--success); border-radius: 20px; padding: 20px; margin-bottom: 30px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(40,167,69,0.1); }
-        .free-section::before { content: "هدية"; position: absolute; top: 10px; left: -30px; background: var(--success); color: white; padding: 5px 40px; transform: rotate(-45deg); font-size: 10px; font-weight: bold; }
+        .free-gift-box { background: white; border: 2px dashed var(--success); border-radius: 20px; padding: 20px; margin-bottom: 30px; }
+        .btn-free { background: var(--success); color: white; padding: 12px; border-radius: 10px; text-decoration: none; display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px; }
 
-        .card { background: white; border-radius: 25px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #eee; position: relative; }
+        .card { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px; border: 1px solid #eee; position: relative; overflow: hidden; }
+        .card-bronze { background: var(--bronze-grad) !important; color: white !important; }
         .card-silver { background: var(--silver-grad) !important; color: #2c3e50 !important; }
         .card-gold { background: var(--gold-grad) !important; color: #2c2100 !important; }
         
-        .price-tag { font-size: 24px; font-weight: bold; color: var(--primary); margin: 5px 0; }
-        .forever-tag { font-size: 12px; font-weight: bold; color: #d32f2f; background: rgba(255,255,255,0.5); display: inline-block; padding: 4px 10px; border-radius: 8px; margin-bottom: 10px; }
-        
-        .features-list { text-align: right; font-size: 13px; margin: 15px 0; padding: 0; list-style: none; }
-        .features-list li { margin-bottom: 8px; display: flex; align-items: center; }
-        .features-list li::before { content: "✅"; margin-left: 8px; }
+        .badge { display: inline-block; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; background: var(--primary); color: white; margin-bottom: 15px; }
+        .price-tag { font-size: 28px; font-weight: bold; margin-bottom: 5px; }
+        .forever-tag { font-size: 13px; font-weight: bold; color: #d32f2f; background: rgba(255,255,255,0.7); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(211, 47, 47, 0.2); }
 
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; display: block; text-decoration: none; margin-top: 10px; box-sizing: border-box; }
-        .btn-free { background: var(--success); color: white; font-size: 14px; margin-bottom: 10px; }
-        .btn-activate { background: #333; color: white; }
-        .btn-go { background: var(--success); color: white; }
+        .features { text-align: right; margin: 20px 0; padding: 0; list-style: none; }
+        .features li { margin-bottom: 10px; font-size: 14px; display: flex; align-items: center; }
+        .features li::before { content: "✔️"; margin-left: 10px; color: var(--success); }
+
+        .ui-box { background: rgba(0,0,0,0.03); padding: 20px; border-radius: 15px; margin-top: 15px; }
+        .notice { font-size: 11px; font-weight: bold; color: #c62828; margin-bottom: 10px; border-right: 3px solid var(--primary); padding-right: 10px; text-align: right; line-height: 1.5; }
+        input { width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #ddd; text-align: center; font-size: 16px; margin-bottom: 10px; box-sizing: border-box; }
         
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid rgba(0,0,0,0.1); border-radius: 10px; text-align: center; box-sizing: border-box; }
-        .notice { font-size: 11px; padding: 10px; border-radius: 10px; border: 1px dashed var(--primary); margin-bottom: 10px; background: rgba(255,255,255,0.4); text-align: right; color: #d32f2f; font-weight: bold; }
-        .error-msg { color: #d32f2f; font-weight: bold; font-size: 13px; margin-top: 10px; display: none; background: #ffebee; padding: 10px; border-radius: 10px; }
-        #admin-panel { display: none; background: white; padding: 25px; border-radius: 25px; border: 2px solid #000; margin-top: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
-        .admin-trigger { background: none; border: none; color: transparent; font-size: 5px; position: fixed; bottom: 5px; right: 5px; cursor: pointer; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .btn-activate { background: var(--dark); color: white; }
+        .btn-success { background: var(--success); color: white; }
+        
+        /* لوحة الأدمن المخفية تماماً بأقصى اليمين بالأسفل */
+        #admin-panel { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: white; padding: 30px; border-radius: 25px; border: 3px solid #000; box-shadow: 0 20px 50px rgba(0,0,0,0.3); z-index: 9999; width: 90%; max-width: 400px; }
+        .admin-trigger-area { position: fixed; bottom: 0; right: 0; width: 40px; height: 40px; background: transparent; border: none; cursor: default; z-index: 10000; outline: none; }
+
+        .footer-link { margin-top: 40px; padding: 20px; border-top: 1px solid #ddd; }
+        .footer-link a { color: #1877f2; text-decoration: none; font-weight: bold; font-size: 15px; }
+        .error-msg { color: #d32f2f; font-weight: bold; font-size: 12px; display: none; margin-top: 10px; }
     </style>
 </head>
 <body onload="initApp()">
 
 <header>
     <h1>Alsokhni Pro 🚀</h1>
-    <p>أكبر أرشيف سوري لملحقات المونتاج</p>
+    <p>بوابتك السورية لعالم المونتاج العالمي</p>
 </header>
 
 <div class="container">
-    
-    <div class="free-section">
-        <h3 style="margin-top:0; color:var(--success);">🎁 ميزات مجانية (جرب الجودة)</h3>
-        <p style="font-size: 13px;">حمل عينات احترافية مجاناً قبل الاشتراك!</p>
-        <a href="https://fonts.google.com/" target="_blank" class="btn btn-free">📁 تحميل حزمة الخطوط المجانية</a>
-        <a href="https://freesound.org/" target="_blank" class="btn btn-free">🎵 مكتبة أصوات أساسية</a>
-        <p style="font-size: 11px; color: #777;">* الباقات المدفوعة تحتوي على أرشيف حصري ونادر جداً.</p>
-    </div>
 
-    <div class="card" id="pkg-1">
-        <span class="badge" style="background:var(--primary); color:white; padding:5px 10px; border-radius:10px; font-size:12px;">الباقة الأساسية</span>
+    <div class="free-gift-box">
+        <h3 style="color:var(--success)">🎁 ميزات مجانية (للبداية)</h3>
+        <a href="https://fonts.google.com/" target="_blank" class="btn-free">📂 تحميل حزمة الـ 500 خط بريميوم</a>
+        <a href="https://freesound.org/" target="_blank" class="btn-free">🎵 مكتبة المؤثرات الصوتية الأساسية</a>
+    </div>
+    
+    <div class="card card-bronze" id="pkg-1">
+        <span class="badge">باقة المبتدئ 🥉</span>
         <div class="price-tag">25,000 ل.س</div>
         <div class="forever-tag">امتلك الميزات للأبد ♾️</div>
-        <ul class="features-list">
-            <li>مكتبة 500+ خط بريميوم.</li>
-            <li>حقيبة ملحقات PSD للتصميم.</li>
-            <li>قوالب سوشيال ميديا جاهزة.</li>
+        <ul class="features">
+            <li>خطوط السخني الاحترافية (عربي/إنجليزي).</li>
+            <li>حقيبة ملحقات PSD للتصاميم السريعة.</li>
+            <li>أيقونات وصور PNG شفافة عالية الدقة.</li>
         </ul>
-        <div id="ui-1">
-            <div class="notice">📌 سيرياتيل كاش: 17273530 (3-6 مساءً)</div>
+        <div id="ui-1" class="ui-box">
+            <div class="notice">
+                📌 ادفع سيرياتيل كاش ل 17273530<br>
+                🕒 التفعيل بعد الدفع ب 3 ساعات الى 12 ساعة<br>
+                🕒 اوقات الدوام هي من 3 ظهرا لل 6 مساء
+            </div>
             <input type="text" id="code-1" placeholder="رقم عملية التحويل">
-            <button class="btn btn-activate" id="btn-1" onclick="verifyPackage(1)">تفعيل الباقة ⚡</button>
+            <button class="btn btn-activate" id="btn-1" onclick="verifyPackage(1)">تفعيل الوصول ⚡</button>
             <div id="error-1" class="error-msg"></div>
         </div>
     </div>
 
     <div class="card card-silver" id="pkg-2">
-        <span class="badge" style="background:#444; color:white; padding:5px 10px; border-radius:10px; font-size:12px;">باقة المحترف 🥈</span>
-        <div class="price-tag" style="color:#2c3e50;">45,000 ل.س</div>
+        <span class="badge" style="background:#333;">باقة المحترف 🥈</span>
+        <div class="price-tag">45,000 ل.س</div>
         <div class="forever-tag">امتلك الميزات للأبد ♾️</div>
-        <ul class="features-list">
-            <li>كل ميزات الباقة الأساسية.</li>
-            <li>أضخم حقيبة انتقالات VFX.</li>
-            <li>مكتبة مؤثرات صوتية سينمائية.</li>
+        <ul class="features">
+            <li>كل ميزات الباقة البرونزية.</li>
+            <li>حقيبة انتقالات VFX (دخان، نار، مؤثرات).</li>
+            <li>مكتبة المؤثرات الصوتية السينمائية.</li>
             <li>فلاتر تصحيح ألوان (LUTs).</li>
         </ul>
-        <div id="ui-2">
-            <div class="notice">📌 الدفع لـ 17273530. التفعيل 3-6 مساءً.</div>
+        <div id="ui-2" class="ui-box">
+            <div class="notice">
+                📌 ادفع سيرياتيل كاش ل 17273530<br>
+                🕒 التفعيل بعد الدفع ب 3 ساعات الى 12 ساعة<br>
+                🕒 اوقات الدوام هي من 3 ظهرا لل 6 مساء
+            </div>
             <input type="text" id="code-2" placeholder="رقم عملية التحويل">
-            <button class="btn btn-activate" id="btn-2" style="background:#2c3e50;" onclick="verifyPackage(2)">فتح حقيبة المحترفين 🥈</button>
+            <button class="btn btn-activate" id="btn-2" style="background:#2c3e50;" onclick="verifyPackage(2)">ترقية الحساب 🥈</button>
             <div id="error-2" class="error-msg"></div>
         </div>
     </div>
 
     <div class="card card-gold" id="pkg-3">
-        <span class="badge" style="background:#000; color:#ffd700; padding:5px 10px; border-radius:10px; font-size:12px;">باقة Ultimate 👑</span>
-        <div class="price-tag" style="color:#2c2100;">70,000 ل.س</div>
+        <span class="badge" style="background:#000; color:#ffd700;">باقة Ultimate الملكية 👑</span>
+        <div class="price-tag">70,000 ل.س</div>
         <div class="forever-tag">امتلك الميزات للأبد ♾️</div>
-        <ul class="features-list">
-            <li>الوصول الكامل لجميع الباقات.</li>
-            <li>أرشيف السخني الخاص (تحديثات دورية).</li>
+        <ul class="features">
+            <li>الوصول الشامل لجميع الباقات السابقة.</li>
+            <li>أرشيف السخني الخاص (تحديثات أسبوعية).</li>
             <li>كورس أسرار المونتاج السريع.</li>
             <li>دعم فني خاص وأولوية قصوى.</li>
         </ul>
-        <div id="ui-3">
-            <div class="notice">📌 الدفع لـ 17273530. تفعيل VIP فوري.</div>
+        <div id="ui-3" class="ui-box">
+            <div class="notice">
+                📌 ادفع سيرياتيل كاش ل 17273530<br>
+                🕒 التفعيل بعد الدفع ب 3 ساعات الى 12 ساعة<br>
+                🕒 اوقات الدوام هي من 3 ظهرا لل 6 مساء
+            </div>
             <input type="text" id="code-3" placeholder="رقم عملية التحويل">
             <button class="btn btn-activate" id="btn-3" style="background:#2c2100;" onclick="verifyPackage(3)">امتلاك الأرشيف الملكي 👑</button>
-            <div id="error-3" class="
+            <div id="error-3" class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="footer-link">
+        <a href="https://www.facebook.com/share/1D24b8PBQ7/" target="_blank">🔗 التواصل مع المطور (Facebook)</a>
+    </div>
+
+    <button class="admin-trigger-area" onclick="showAdmin()"></button>
+
+    <div id="admin-panel">
+        <h3>لوحة إدارة السخني</h3>
+        <div id="admin-login">
+            <input type="password" id="admin-pass" placeholder="كلمة السر">
+            <button class="btn btn-activate" onclick="checkAdminPass()">دخول</button>
+        </div>
+        <div id="admin-tools" style="display:none;">
+            <input type="text" id="new-code" placeholder="رقم عملية جديد">
+            <select id="target-level" style="width:100%; padding:10px; margin-bottom:10px; border-radius:10px;">
+                <option value="1">البرونزية</option>
+                <option value="2">الفضية</option>
+                <option value="3">الذهبية</option>
+            </select>
+            <button class="btn btn-success" onclick="addCodeToFirebase()">✅ تفعيل الكود</button>
+            <button class="btn" style="background:#999; margin-top:10px;" onclick="closeAdmin()">إغلاق</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyD5SBNB_XuMz97sVDvoWPYBqKfe7KjaQlA",
+        authDomain: "alsokhnipro-2b720.firebaseapp.com",
+        projectId: "alsokhnipro-2b720",
+        appId: "1:72490856072:web:048a610cb8f7f9b73e793d"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const driveLinks = { 1: "https://www.stickpng.com/cat/templates", 2: "https://vfx.productioncrate.com/video-effects.html", 3: "https://archive.org/details/design-assets-collection" };
+    let attempts = 0;
+
+    function initApp() { checkSavedAccess(); checkBanStatus(); }
+
+    function checkSavedAccess() {
+        [1, 2, 3].forEach(level => {
+            if (localStorage.getItem('access_pkg_' + level) === 'true') {
+                document.getElementById('ui-' + level).innerHTML = `<button class="btn btn-success" onclick="window.location.href='${driveLinks[level]}'">🚀 دخول (مفعل للأبد)</button>`;
+            }
+        });
+    }
+
+    function checkBanStatus() {
+        const banTime = localStorage.getItem('ban_until');
+        if (banTime && Date.now() < banTime) startBanCountdown(banTime);
+    }
+
+    function startBanCountdown(until) {
+        [1, 2, 3].forEach(i => {
+            const btn = document.getElementById('btn-' + i);
+            const err = document.getElementById('error-' + i);
+            if (btn) btn.disabled = true;
+            const timer = setInterval(() => {
+                const rem = until - Date.now();
+                if (rem <= 0) {
+                    clearInterval(timer);
+                    if (btn) btn.disabled = false;
+                    if (err) err.style.display = 'none';
+                    localStorage.removeItem('ban_until');
+                    attempts = 0;
+                } else {
+                    const m = Math.floor((rem % 3600000) / 60000), s = Math.floor((rem % 60000) / 1000);
+                    if (err) { err.style.display = 'block'; err.innerHTML = `⚠️ حظر مؤقت! انتظر: ${m}:${s}`; }
+                }
+            }, 1000);
+        });
+    }
+
+    async function verifyPackage(level) {
+        if (localStorage.getItem('ban_until')) return;
+        const code = document.getElementById('code-' + level).value.trim();
+        if(!code) return alert("حط رقم العملية أولاً!");
+
+        const snapshot = await db.collection("payments").where("id", "==", code).where("level", "==", level).where("used", "==", false).get();
+
+        if (!snapshot.empty) {
+            await db.collection("payments").doc(snapshot.docs[0].id).update({ used: true });
+            localStorage.setItem('access_pkg_' + level, 'true');
+            alert("✅ تم التفعيل بنجاح!");
+            checkSavedAccess();
+        } else {
+            attempts++;
+            if (attempts >= 3) {
+                const banTime = Date.now() + (3 * 60 * 60 * 1000);
+                localStorage.setItem('ban_until', banTime);
+                startBanCountdown(banTime);
+            } else { alert(`❌ الكود غلط! معك ${3 - attempts} محاولات.`); }
+        }
+    }
+
+    function showAdmin() { document.getElementById('admin-panel').style.display = 'block'; }
+    function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
+    function checkAdminPass() {
+        if(document.getElementById('admin-pass').value === "1996") {
+            document.getElementById('admin-tools').style.display = 'block';
+            document.getElementById('admin-login').style.display = 'none';
+        } else { alert("غلط!"); }
+    }
+    async function addCodeToFirebase() {
+        const code = document.getElementById('new-code').value.trim();
+        const level = parseInt(document.getElementById('target-level').value);
+        if(!code) return alert("حط كود!");
+        await db.collection("payments").add({ id: code, level: level, used: false, date: new Date() });
+        alert("✅ تم تفعيل الكود بنجاح!");
+        document.getElementById('new-code').value = "";
+    }
+</script>
+</body>
+</html>
